@@ -1,0 +1,27 @@
+~~ main program
+   (0 1 2 3 4 5 6 7 8 9)
+-4 ('print keep -> ')
+ 5 ('print pop  -> ')
+ . (~)
+
+~~ functions
+'print pop  -> '{([:])(top{?(.comma),(~)}bot~)-(^,~)}
+'print keep -> '{([:])(top;|bot~)(;{(;!!-:#.comma[\]~)}$bot~)-(^,~)}
+
+~~ various printable strings
+top{(['['|:|'|']~)-(^,~)}
+bot{(['\b|'|:|']'])("~)-(^,~)}
+comma{','(^,~)}
+
+~~ functions to push numbers 0-9 to stack
+0{0(^~)}
+1{1(^~)}
+2{2(^~)}
+3{3(^~)}
+4{4(^~)}
+5{5(^~)}
+6{6(^~)}
+7{7(^~)}
+8{8(^~)}
+9{9(^~)}
+

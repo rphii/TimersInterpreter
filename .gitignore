@@ -1,0 +1,17 @@
+*.exe
+*.swp
+*.o
+*.d
+*.txt
+.vscode
+*.out
+tags
+*.stackdump
+.obsidian
+obj/*
+
+a
+b
+*.vim
+timers
+

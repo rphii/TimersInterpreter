@@ -1,0 +1,6 @@
+~~('name'name~[.%]).("~)-(^,~)
+(name' 'name~[.%]).("~)-(^,~)
+name{([:])-(~)} ~~ not expected to be called
+namename{([:])-(~)} ~~ expected to be called
+'name name'{([:])-(~)} ~~ expected to be called
+
