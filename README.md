@@ -1,6 +1,3 @@
-# TODO TO BE LEAK FREE
-- wherever I call freeing functions, also call them in the ERROR section of code
-
 # Timers
 Timers is an esoteric programming language.
 
