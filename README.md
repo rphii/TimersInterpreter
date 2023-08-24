@@ -59,12 +59,13 @@ Explanation:
     5. `"` print a new line
     6. `~` destroy the caller's timer (stop program)
 
-### *experimental* Fizz-Buzz **TODO link**
+### Fizz-Buzz **TODO link**
 ```
-+3(^{(['Fizz'])-(^,~)})
-+5(^{(['Buzz'])-(^,~)})
--(+|.)
--($")
+3+(^{(['Fizz'])-(^,~)})
+5+(^{(['Buzz'])-(^,~)})
+1-(+|^.)
+1-($")
+100(~)
 ```
 
 ## The Rules
