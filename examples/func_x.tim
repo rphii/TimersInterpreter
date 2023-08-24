@@ -1,0 +1,12 @@
+(@function?x?~)
+
+function{([:])(")-(^,~)}        ~~ input=''
+function1x{([:])(")-(^,~)}      ~~ input=1''
+function1x_{([:])(")-(^,~)}     ~~ input=1
+function1x2{([:])(")-(^,~)}     ~~ input=12
+function_x_{([:])(")-(^,~)}     ~~ input= [empty]
+'function1x '{([:])(")-(^,~)}   ~~ input=1 [note the space]
+'function1x\\'{([:])(")-(^,~)}  ~~ input=1'\\'
+'function\'x\''{([:])(")-(^,~)} ~~ input='\'''\''
+
+

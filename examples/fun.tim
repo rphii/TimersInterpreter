@@ -1,0 +1,4 @@
+(function1"function2").(~)
+function1{(['This should print "Function1"'])-(^,~).(~")}
+function2{(['This should print "Function2"'])-(^,~).(~")}
+
