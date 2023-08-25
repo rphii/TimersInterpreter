@@ -501,13 +501,13 @@ ErrDecl next_in_scope(Run *run, Scope *scope, Ast *node, bool skip_current, TriV
                 THROW("handle this, is it even possible?");
             }
 #endif
-            if(scope->created_timer) {
-                scope->created_timer = false;
-                break;
-            }
             if(run->called_scope) {
                 scope->resume.next_i = i;
                 INFO("exit function");
+                break;
+            }
+            if(scope->created_timer) {
+                scope->created_timer = false;
                 break;
             }
             if(scope->destroy_timer) { /* I am fucking unsure if I need this */
