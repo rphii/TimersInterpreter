@@ -1,5 +1,5 @@
-,([99-0]~)
--(^a~b":!|c d"$)
+,([99-1]~)
+-(^a~b"c:!!-d"$)
 
 a{(~:.[' bottles of beer on the wall, '])-(^,~)}
 b{(~:.[' bottles of beer.'])-(^,~)}
