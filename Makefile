@@ -5,8 +5,9 @@ CC      := gcc
 CFLAGS  := -Wall -Wextra -Wimplicit \
 		   -Wno-unused-parameter \
 		   -Wconversion \
-		   -O2 \
+		   -O3 -march=native \
 		   ##############\
+		   -O2 \
 		   -O0 -g \
 		   -rdynamic -Og -ggdb3 \
 		   -fsanitize=address \

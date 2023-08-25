@@ -496,9 +496,11 @@ ErrDecl next_in_scope(Run *run, Scope *scope, Ast *node, bool skip_current, TriV
             if(scope->randomize) {
                 break;
             }
+#if 0
             if(scope->created_timer && run->called_scope) {
                 THROW("handle this, is it even possible?");
             }
+#endif
             if(scope->created_timer) {
                 scope->created_timer = false;
                 break;
