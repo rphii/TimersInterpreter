@@ -1,0 +1,8 @@
+,([99-0]~)
+-(^a b"c d"$~)
+
+a{(~:.[' bottles of beer on the wall, '])-(^,~)}
+b{(~:.[' bottles of beer.'])-(^,~)}
+c{(~['Take one down and pass it around, '])-(^,~)}
+d{(~:.[' bottles of beer on the wall.'])-(^,~)}
+
