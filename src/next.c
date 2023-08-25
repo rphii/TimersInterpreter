@@ -505,17 +505,17 @@ ErrDecl next_in_scope(Run *run, Scope *scope, Ast *node, bool skip_current, TriV
                 scope->created_timer = false;
                 break;
             }
+            if(run->called_scope) {
+                scope->resume.next_i = i;
+                INFO("exit function");
+                break;
+            }
             if(scope->destroy_timer) { /* I am fucking unsure if I need this */
                 break;
             }
 #if DEBUG_NEXT
             printf("]");
 #endif
-            if(run->called_scope) {
-                scope->resume.next_i = i;
-                INFO("exit function");
-                break;
-            }
 #if 0
             scope->timers.ll->i0++;
             break;
