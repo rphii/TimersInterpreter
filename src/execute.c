@@ -130,11 +130,11 @@ ErrDeclStatic execute_static_cmd(Run *run, Scope *scope, char cmd, bool ignore_w
             touched_stack = true;
         } break;
         case LEX_CH_SWAP: {
-            Val v1 = 0;
-            Val v2 = 0;
-            if(len >= 1) vec_val_pop_back(stack, &v1);
-            if(len >= 2) vec_val_pop_back(stack, &v2);
-            if(len) {
+            if(len >= 2) {
+                Val v1 = 0;
+                Val v2 = 0;
+                vec_val_pop_back(stack, &v1);
+                vec_val_pop_back(stack, &v2);
                 TRY(vec_val_push_back(stack, v1), ERR_VEC_PUSH_BACK);
                 TRY(vec_val_push_back(stack, v2), ERR_VEC_PUSH_BACK);
             }
@@ -429,8 +429,8 @@ ErrDeclStatic execute_static_func_call(Run *run, Scope *scope, Ast *node)
                         TRY(str_app(&callstring, "%.*s", STR_UNP(temp)), ERR_STR_APP);
                         callstring_do = true;
                     } else {
-                        /* invalid string -> try continuing */
-                        callstring_force = true;
+                        /* invalid string -> don't care */
+                        //callstring_force = true;
                     }
                 } else {
                     /* convert to utf8 */
@@ -462,7 +462,6 @@ ErrDeclStatic execute_static_func_call(Run *run, Scope *scope, Ast *node)
         } else {
             THROW(ERR_UNHANDLED_ID", %s, likely a parser error", ast_id_str(child->id));
         }
-        INFO("%zu/%zu CALLSTRING:%.*s", i, child_len, STR_UNP(callstring));
         if(callstring_force) break;
     }
     if(callstring_do || callstring_force) {
