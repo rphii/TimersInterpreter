@@ -1,10 +1,14 @@
 (@function?x?~)
 
-function{([:])(")-(^,~)}        ~~ input=''
-function1x{([:])(")-(^,~)}      ~~ input=1''
+'this can be considered a comment'{(~)}
+
+functionx{([:])(")-(^,~)}       ~~ input='anunfinishedstring OR input='''' [two empty strings]
+functionx_{([:])(")-(^,~)}      ~~ input='' [an empty string]
+functionx1{([:])(")-(^,~)}      ~~ input=''1
+function1x{([:])(")-(^,~)}      ~~ input=1'' OR input=1'anunfinishedstring
 function1x_{([:])(")-(^,~)}     ~~ input=1
 function1x2{([:])(")-(^,~)}     ~~ input=12
-function_x_{([:])(")-(^,~)}     ~~ input= [empty]
+function_x_{([:])(")-(^,~)}     ~~ input=[enter; empty]
 'function1x '{([:])(")-(^,~)}   ~~ input=1 [note the space]
 'function1x\\'{([:])(")-(^,~)}  ~~ input=1'\\'
 'function\'x\''{([:])(")-(^,~)} ~~ input='\'''\''
