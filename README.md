@@ -64,7 +64,7 @@ There are three types of ways to make comments.
 
 ### Time and related
 - At program startup there is one timer whose value is initialized to 0.
-- Every timer counts one up, until a corresponding time function is found, where they will pause until the code inside finished executing.
+- Every timer counts one up, until a corresponding [time function](#Time-Functions) is found, where they will pause until the code inside finished executing.
 - Once a timer overflows it resets to 0.
 - Every scope is treated like a seperate program with "private" timers.
 - Technical note: The interval between counting is undefined. Ideally it approaches t=0, because then the interpreter/compiler is optimized.
@@ -76,7 +76,7 @@ There are three types of ways to make comments.
 - Once a scope is terminated, flow of execution is returned to its parent scope.
 
 ### Operations
-The following operations can be put inside any [time function](#Time Functions]).
+The following operations can be put inside any [time function](#Time-Functions]).
 
 |Character  |Description|
 |-----------|-----------|
@@ -110,7 +110,7 @@ The following operations can be put inside any [time function](#Time Functions])
 
 ### New
 The following combinations can be but inside `[]` to create new timers. New timers start searching
-for matching [time functions](#time functions) starting on the next one (prevents this: `([0]~)-(.~)` from turning into an endless loop).
+for matching [time functions](#Time-Functions) starting on the next one (prevents this: `([0]~)-(.~)` from turning into an endless loop).
 
 | ..             | Description                                                                                 |
 | -------------- | ------------------------------------------------------------------------------------------- |
@@ -145,7 +145,7 @@ Dividing (or modulo) by zero brings some consequences with it:
 - TL;DR Randomize. (The non-dramatic version)
 
 ### Modifiers
-Modifiers can be used in [new](#New) or for [time functions](#Time Functions).
+Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 
 | ..                  | Description          |
 | ------------------- | -------------------- |
@@ -200,11 +200,11 @@ Modifiers can be used in [new](#New) or for [time functions](#Time Functions).
 - Use any of the special operations used within the section [new](#New) in combination with [modifiers](#Modifiers). However, the numbers shall not be placed in square brackets, but before a pair of round brackets, e.g.  `HERE()`. 
 - Within the `[)` is the actual function body, where commands ([operations](#Operations)) are executed character for character.
 - You can have up to one line break (and any amount of horizontal whitespace) that a number is associated to a function of time. Otherwise, if no number can be associated to a function of time, default to 0.
-- All matching time function are executed if any timer with it's current value matches any of it's number(s).
+- All matching [time function](#Time-Functions) are executed if any timer with it's current value matches any of it's number(s).
 
 #### The only difference in numbers to the new operation
 - [New](#New) operation: `[1 2]` is different from `[1|2]`. If we have no valid [modifiers](#Modifiers) between any two numbers, including literals or whitespace, the newest timer will be the rightmost. If we correctly concatenate them, the newest timer will be the leftmost. _This adheres to the rules of creating matches of strings: `['A string'])`_
-- [time functions](#time functions]): `1 2()` is equivalent to the function of time `2()`, where the `1` gets discarded. If you _really_ want to either hit `1` or `2`, you have to concatenate those in this case: `1|2()`.
+- [time functions](#Time-Functions): `1 2()` is equivalent to the function of time `2()`, where the `1` gets discarded. If you _really_ want to either hit `1` or `2`, you have to concatenate those in this case: `1|2()`.
 
 ### Scopes
 - Scopes are recognized by curly brackets: `{}`
