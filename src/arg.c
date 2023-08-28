@@ -215,7 +215,11 @@ ErrDeclStatic arg_static_execute(Args *args, ArgList id)
         } break;
         case ARG_VERSION: {
 #if defined(VERSION)
-            printf("%s\n", VERSION);
+            if(strlen(VERSION)) {
+                printf("%s\n", VERSION);
+            } else {
+                printf(F("failed ", FG_RD)"(git not installed or you didn't clone the repository)\n");
+            }
             args->exit_early = true;
 #else
             /* https://stackoverflow.com/questions/1704907/how-can-i-get-my-c-code-to-automatically-print-out-its-git-version-hash */
