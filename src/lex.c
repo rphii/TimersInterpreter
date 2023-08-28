@@ -143,7 +143,7 @@ static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
             char *goalptr = s;
             char *realend = s;
             bool ugly = false;
-            if(*s == '0') {
+            if(*s == '0' && strchr(LEX_OCTAL "xX", (int)*(s + 1))) {
                 if(strchr(LEX_OCTAL, (int)*(s + 1))) {
                     while(strchr(LEX_OCTAL, (int)*goalptr)) goalptr++;
                     realend = goalptr;
