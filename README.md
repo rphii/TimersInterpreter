@@ -191,7 +191,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 #### Times
 - Takes anything on either side, even a string.
 - If one of either of the side is a string, it will create a times calculation for all characters, e.g. `'abc'#''` is synonymous with `'a'#'b'#'c'#''`. Empty strings are "treated" as 0, so the previous range is _actually_ going to be `'a'#'b'#'c'#0`. Single characters are converted to their codepoint.
-- If there is a chain of values, e.g. `1#3#5#7` it will automatically assume that the programmer wants this instead `1#3|3#5|5#7`
+- If there is a chain of values, e.g. `2#3#5#7` it will automatically assume that the programmer wants this instead `2#3|2#5|2#7`
 - In this context, times is referring to multiplication of two values.
 - If the left side is not specified, default to 0.
 - If the right side is not specified, default to left item.
