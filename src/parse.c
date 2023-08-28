@@ -1074,6 +1074,7 @@ static int parse_static_scope_def(Lex *lex, size_t *index, Ast **node)
             if(item->id != LEX_ID_IDENTIFIER && item->str.l && str_at(&item->str, 0) != LEX_CH_DEF_OPEN) {
                 INFO("go up since pattern doesn't match");
                 ast_free(*node, true, false);
+                *index = child->i;
                 TRY(ast_adjust_il(*node, *index), ERR_AST_ADJUST_IL);
                 TRY(ast_parent_get(*node, node), ERR_AST_PARENT_GET);
                 return 0;
