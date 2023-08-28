@@ -998,11 +998,19 @@ ErrDecl expr_eval(VecVal *stack, Scope *scope, Ast *node, AstIDList id_decode, E
                 /* sequence, power, times */
                 if(!did_something && parent->id == AST_ID_SEQUENCE) {
                     if(!buf->kind) INFO("set sequence...");
+                    else if(buf->kind != parent->id) {
+                        TRY(expr_static_handle_kind(buf), ERR_EXPR_HANDLE_KIND);
+                        TRY(expr_static_purge_until(buf, 0), ERR_EXPR_PURGE_UNTIL);
+                    }
                     buf->kind = parent->id;
                     did_something = true;
                 }
                 if(!did_something && parent->id == AST_ID_POWER) {
                     if(!buf->kind) INFO("set power...");
+                    else if(buf->kind != parent->id) {
+                        TRY(expr_static_handle_kind(buf), ERR_EXPR_HANDLE_KIND);
+                        TRY(expr_static_purge_until(buf, 0), ERR_EXPR_PURGE_UNTIL);
+                    }
                     buf->kind = parent->id;
                     did_something = true;
                 }
