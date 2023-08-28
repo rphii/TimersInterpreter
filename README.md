@@ -104,7 +104,7 @@ The following operations can be put inside any [time function](#Time-Functions])
 |`=`        |Equals : Pop two values a and b, then push 1 if a=b, otherwise 0|
 |`!`        |Logical not : Pop a value. If the value is 0 push 1, otherwise 0|
 |<code>&#124;</code>|If : Pop a value. If the value is not 0, exit the current function (continue if 0)|
-|`d`        |Execute a defined scope, where `d` gets replaced with the name [see (scopes](#Scopes]))|
+|`d`        |Execute a defined scope, where `d` gets replaced with the name (see [scopes](#Scopes]))|
 |`{f}`      |Execute a scope, where `f` gets replaced with function(s) of time. Similar to above, but inlined|
 |`[t]`      |Initiate a new timer (finish execution of current function), starting from `t`, where `t` is a number (see [new](#New))|
 
