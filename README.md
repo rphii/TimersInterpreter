@@ -160,7 +160,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 
 #### Range
 - Takes anything on either side, even a string.
-- If one of either of the side is a string, it will create a range for all characters, e.g. `'abc'-''` is synonymous with `'a'-'b'-'c'-''`. Empty strings are "treated" as being the same values as the one on the other side, so the previous range is _actually_ going to be `'a'-'b'-'c'-'c'`. Single characters are converted to their codepoint.
+- If one of either of the side is a string, it will create a range for all characters, e.g. `'abc'-''` is synonymous with `'a'-'b'-'c'-''`. Empty strings are removed and the whole construct is reduced to whatever is left, so the previous range is _actually_ going to be `'a'-'b'-'c'`. Single characters are converted to their codepoint.
 - If there is a chain of values, e.g. `1-3-5-7` it will automatically assume that the programmer wants this instead `1-3|3-5|5-7`
 - A range of two values creates each value once, so `1-5` is actually `1|2|3|4|5`.
 - If the left side is not specified, default to 0.
@@ -168,7 +168,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 
 #### Linear Sequence
 - Takes anything on either side, even a string.
-- If one of either of the side is a string, it will create a linear sequence for all characters, e.g. `'abc'+''` is synonymous with `'a'+'b'+'c'+''`. Empty strings are "treated" as being the same values as the one on the other side, so the previous range is _actually_ going to be `'a'+'b'+'c'+'c'`. Single characters are converted to their codepoint.
+- If one of either of the side is a string, it will create a linear sequence for all characters, e.g. `'abc'+''` is synonymous with `'a'+'b'+'c'+''`. Empty strings are removed and the whole construct is reduced to whatever is left, so the previous range is _actually_ going to be `'a'+'b'+'c'`. Single characters are converted to their codepoint.
 - If there is a chain of values, e.g. `1+3+5+7` it will automatically assume that the programmer wants this instead `1+3|3+5|5+7`
 - A linear sequence is $$v_i=v_\text{base}+i\cdot v_\text{step}$$ where $i$ is the i-th value of the sequence, $v_\text{base}$ the first and $v_\text{step}$ the second value.
 - Optionally, one can specify an inclusive upper limit with a range modifier, e.g. `1+3-10` is synonymous to `1|4|7|10`.
@@ -179,8 +179,8 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 
 #### Exponential Sequence
 - Takes anything on either side, even a string.
-- If one of either of the side is a string, it will create an exponential sequence for all characters, e.g. `'abc'*''` is synonymous with `'a'*'b'*'c'*''`. Empty strings are "treated" as being the same values as the one on the other side, so the previous range is _actually_ going to be `'a'*'b'*'c'*'c'`. Single characters are converted to their codepoint.
-- If there is a chain of values, e.g. `1*3*5*7` it will automatically assume that the programmer wants this instead `1*3|3*5|5*7`
+- If one of either of the side is a string, it will create an exponential sequence for all characters, e.g. `'abc'*''` is synonymous with `'a'*'b'*'c'*''`. Empty strings are removed and the whole construct is reduced to whatever is left, so the previous range is _actually_ going to be `'a'*'b'*'c'`. Single characters are converted to their codepoint.
+- If there is a chain of values, e.g. `2*3*5*7` it will automatically assume that the programmer wants this instead `2*3|2*5|2*7`
 - An exponential sequence is $$v_i=(i+v_\text{base})^{v_\text{step}}$$ where $i$ is the i-th value of the sequence, $v_\text{base}$ the first and $v_\text{step}$ the second value.
 - Optionally, one can specify an inclusive upper limit with a range modifier, e.g. `1*3-100` is synonymous to `1|8|27|64`.
 - Optionally, one can specify a times modifier, e.g. `1+3#10` is synonymous to `1|8|27|64|125|216|343|512|729|1000`. (which will consider up to 10 values, as specified by that 10)
@@ -190,7 +190,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 
 #### Times
 - Takes anything on either side, even a string.
-- If one of either of the side is a string, it will create a times calculation for all characters, e.g. `'abc'#''` is synonymous with `'a'#'b'#'c'#''`. Empty strings are "treated" as 0, so the previous range is _actually_ going to be `'a'#'b'#'c'#0`. Single characters are converted to their codepoint.
+- If one of either of the side is a string, it will create a times calculation for all characters, e.g. `'abc'#''` is synonymous with `'a'#'b'#'c'#''`. Empty strings are removed and the whole construct is reduced to whatever is left, so the previous example is _actually_ going to be `'a'#'b'#'c'`. Single characters are converted to their codepoint.
 - If there is a chain of values, e.g. `2#3#5#7` it will automatically assume that the programmer wants this instead `2#3|2#5|2#7`
 - In this context, times is referring to multiplication of two values.
 - If the left side is not specified, default to 0.
