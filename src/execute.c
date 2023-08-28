@@ -430,7 +430,6 @@ ErrDeclStatic execute_static_func_call(Run *run, Scope *scope, Ast *node)
                         callstring_do = true;
                     } else {
                         /* invalid string -> don't care */
-                        //callstring_force = true;
                     }
                 } else {
                     /* convert to utf8 */

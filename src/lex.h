@@ -11,6 +11,7 @@
 #define LEX_OPERATORS   "~^$\\:;.,\"#`?&@+-*/%><=!#|"
 #define LEX_SEPARATORS  "()[]{}"
 #define LEX_OCTAL       "01234567"
+#define LEX_DEC         "0123456789"
 #define LEX_HEX         "0123456789abcdefABCDEF"
 
 #define LEX_CH_MAX          '.'

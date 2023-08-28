@@ -87,7 +87,9 @@ error:
 
 static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
 {
+    int err = 0;
     bool err_esc = false;
+    Str temp = {0};
     if(!stream) THROW(ERR_STR_POINTER);
     if(!li) THROW(ERR_LEXITEM_POINTER);
     if(!fn) THROW(ERR_STR_POINTER);
@@ -136,12 +138,34 @@ static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
         /* try to convert current position to a number */
         else {
             char *endptr = 0;
+            size_t num = 0;
             errno = 0;
-            size_t num = (size_t)strtoull(s, &endptr, 0);
-            if(!*endptr || (*endptr && (isspace((int)*endptr) || strchr(LEX_SEPARATORS, (int)*endptr) || strchr(LEX_OPERATORS, (int)*endptr) || *endptr == LEX_CH_STRING))) {
+            char *goalptr = s;
+            char *realend = s;
+            bool ugly = false;
+            if(*s == '0') {
+                if(strchr(LEX_OCTAL, (int)*(s + 1))) {
+                    while(strchr(LEX_OCTAL, (int)*goalptr)) goalptr++;
+                    realend = goalptr;
+                } else if(strchr("xX", *(s + 1))) {
+                    goalptr += 2;
+                    while(strchr(LEX_HEX, (int)*goalptr)) goalptr++;
+                }
+                realend = goalptr;
+                while(!(realend && (isspace((int)*realend) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*realend)))) { 
+                    realend++;
+                }
+                TRY(str_app(&temp, "%.*s", (int)(goalptr - s), s), ERR_STR_APP);
+                num = (size_t)strtoull(temp.s, &endptr, 0);
+                li->l = (size_t)(endptr - temp.s);
+                ugly = true;
+            } else {
+                num = (size_t)strtoull(s, &endptr, 0);
+                li->l = (size_t)(endptr - s);
+            }
+            if(!*endptr || (*endptr && (isspace((int)*endptr) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*endptr)))) {
                 li->num = (Val)num;
                 li->id = LEX_ID_LITERAL;
-                li->l = (size_t)(endptr - s);
                 /* special case - peek forward to understand */
                 bool found = false;
                 TRY(lex_static_search_def(stream, i + li->l, &found), "failed searching def");
@@ -149,9 +173,20 @@ static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
                     li->id = LEX_ID_IDENTIFIER;
                     li->num = 0;
                 } else {
-                    if(errno == ERANGE) {
+                    if(errno) {
                         err_esc = true;
+                        li->i = i;
+                        li->l = ugly ? (size_t)(endptr - temp.s) : (size_t)(endptr - s);
                         THROW("number out of range");
+                    } else if(realend != goalptr) {
+                        realend = s; /* recalculate this just in case idk which case this would actually trigger */
+                        while(!(realend && (isspace((int)*realend) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*realend)))) { 
+                            realend++;
+                        }
+                        err_esc = true;
+                        li->i = i;
+                        li->l = (size_t)(realend - s);
+                        THROW("incorrect number");
                     }
                 }
             }
@@ -223,7 +258,9 @@ static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
         li->id = LEX_ID_END;
     }
 
-    return 0;
+clean:
+    str_free_single(&temp);
+    return err;
 error:
     /* TODO add lex hinting... */
     if(err_esc) {
@@ -231,7 +268,7 @@ error:
         lex_hint_item(ERR_FILE_STREAM, li, stream, fn);
 #endif
     }
-    return -1;
+    ERR_CLEAN;
 }
 
 static int lex_static_get_octal(char **s, Str *esc)
