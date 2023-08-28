@@ -157,7 +157,7 @@ static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
                 }
                 TRY(str_app(&temp, "%.*s", (int)(goalptr - s), s), ERR_STR_APP);
                 num = (size_t)strtoull(temp.s, &endptr, 0);
-                li->l = (size_t)(endptr - temp.s);
+                li->l = (size_t)(realend - s);
                 ugly = true;
             } else {
                 num = (size_t)strtoull(s, &endptr, 0);
