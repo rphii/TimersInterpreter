@@ -1,6 +1,15 @@
 # Timers
 Timers is an esoteric programming language.
 
+## Installation
+The easiest way to install this is by running `make`. Pro-tip, to speed up compilation: You can
+specify the number of threads via `make -j4`, where in this case you would specify that you have 4
+threads.
+
+### Compile flags
+- `-DCOLORPRINT_DISABLE` add this to the `CFLAGS` in the Makefile to disable any form of colored or
+  formatted (bold / colored) output of text.
+
 ## Story
 Original concept was created back in 2021 by me (rphii).
 
