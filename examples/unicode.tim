@@ -1,121 +1,121 @@
 Main program
 (
     HEADER
-    Basic_Latin
-    Latin_1_Supplement
-    Latin_Extended_A
-    Latin_Extended_B
-    IPA_Extensions
-    Spacing_Modifiers
-    Comining_Diacritics
-    Greek_Coptic
-    Cyrillic
-    Cyrillic_Supplement
-    Armenian
-    Hebrew
-    Arabic
-    Syriac
-    Arabic_Supplement
-    Thaana
-    NKo
-    Samaritan
-    Mandaic
-    Syriac_Supplement
-    Arabic_Extended_A
-    Devanagari
-    Bengali
-    Gurmukhi
-    Gujarati
-    Oriya
-    Tamil
-    Telugu
-    Kannada
-    Malayalam
-    Sinhala
-    Thai
-    Lao
-    Tibetan
-    Myanmar
-    Georgian
-    Hangul_Jamo
-    Ethiopic
-    Ethiopic_Supplement
-    Cherokee
-    Unified_Can_AS
-    Ogham
-    Runic
-    Tagalog
-    Hanunoo
-    Buhid
-    Tagbanwa
-    Khmer
-    Mongolian
-    Unified_Can_AS_Ext
-    Limbu
-    Tai_Le
-    Hiragana
-    Katakana
+    'Basic Latin: '
+    'Latin 1 Supplement: '
+    'Latin Extended A: '
+    'Latin Extended B: '
+    'IPA Extensions: '
+    'Spacing Modifiers: '
+    'Comining Diacritics: '
+    'Greek Coptic: '
+    'Cyrillic: '
+    'Cyrillic Supplement: '
+    'Armenian: '
+    'Hebrew: '
+    'Arabic: '
+    'Syriac: '
+    'Arabic Supplement: '
+    'Thaana: '
+    'NKo: '
+    'Samaritan: '
+    'Mandaic: '
+    'Syriac Supplement: '
+    'Arabic Extended A: '
+    'Devanagari: '
+    'Bengali: '
+    'Gurmukhi: '
+    'Gujarati: '
+    'Oriya: '
+    'Tamil: '
+    'Telugu: '
+    'Kannada: '
+    'Malayalam: '
+    'Sinhala: '
+    'Thai: '
+    'Lao: '
+    'Tibetan: '
+    'Myanmar: '
+    'Georgian: '
+    'Hangul Jamo: '
+    'Ethiopic: '
+    'Ethiopic Supplement: '
+    'Cherokee: '
+    'Unified Can AS: '
+    'Ogham: '
+    'Runic: '
+    'Tagalog: '
+    'Hanunoo: '
+    'Buhid: '
+    'Tagbanwa: '
+    'Khmer: '
+    'Mongolian: '
+    'Unified Can AS Ext: '
+    'Limbu: '
+    'Tai Le: '
+    'Hiragana: '
+    'Katakana: '
 )
 
 Terminate program
 .(s~)
 
 The functions
-HEADER              {(s['= (INCOMPLETE) UNICODE TABLE ='])(s)-(^,~)}
-s                   {("['==============================\n'])()-(^,~)}
-Basic_Latin         {(s[0x0021 - 0x007E]['Basic Latin: '])-(^,~)}
-Latin_1_Supplement  {(s[0x00A1 - 0x00FF]['Latin-1 Supplement: '])-(^,~)}
-Latin_Extended_A    {(s[0x0100 - 0x017F]['Latin Extended-A: '])-(^,~)}
-Latin_Extended_B    {(s[0x0180 - 0x024F]['Latin Extended-B: '])-(^,~)}
-IPA_Extensions      {(s[0x0250 - 0x02AF]['IPA Extensions: '])-(^,~)}
-Spacing_Modifiers   {(s[0x02B0 - 0x02FF]['Spacing Modifier Letters: '])-(^,~)}
-Comining_Diacritics {(s[0x0300 - 0x036F]['Combining Diacritical Marks: '])-(^,~)}
-Greek_Coptic        {(s[0x0370 - 0x03FF]['Greek and Coptic: '])-(^,~)}
-Cyrillic            {(s[0x0400 - 0x04FF]['Cyrillic: '])-(^,~)}
-Cyrillic_Supplement {(s[0x0500 - 0x052F]['Cyrillic Supplement: '])-(^,~)}
-Armenian            {(s[0x0530 - 0x058F]['Armenian: '])-(^,~)}
-Hebrew              {(s[0x0590 - 0x05FF]['Hebrew: '])-(^,~)}
-Arabic              {(s[0x0600 - 0x06FF]['Arabic: '])-(^,~)}
-Syriac              {(s[0x0700 - 0x074F]['Syriac: '])-(^,~)}
-Arabic_Supplement   {(s[0x0750 - 0x077F]['Arabic Supplement: '])-(^,~)}
-Thaana              {(s[0x0780 - 0x07BF]['Thaana: '])-(^,~)}
-NKo                 {(s[0x07C0 - 0x07FF]['NKo: '])-(^,~)}
-Samaritan           {(s[0x0800 - 0x083F]['Samaritan: '])-(^,~)}
-Mandaic             {(s[0x0840 - 0x085F]['Mandaic: '])-(^,~)}
-Syriac_Supplement   {(s[0x0860 - 0x086F]['Syriac_Supplement: '])-(^,~)}
-Arabic_Extended_A   {(s[0x08A0 - 0x08FF]['Arabic Extended-A: '])-(^,~)}
-Devanagari          {(s[0x0900 - 0x097F]['Devanagari: '])-(^,~)}
-Bengali             {(s[0x0980 - 0x09FF]['Bengali: '])-(^,~)}
-Gurmukhi            {(s[0x0A00 - 0x0A7F]['Gurmukhi: '])-(^,~)}
-Gujarati            {(s[0x0A80 - 0x0AFF]['Gujarati: '])-(^,~)}
-Oriya               {(s[0x0B00 - 0x0B7F]['Oriya: '])-(^,~)}
-Tamil               {(s[0x0B80 - 0x0BFF]['Tamil: '])-(^,~)}
-Telugu              {(s[0x0C00 - 0x0C7F]['Telugu: '])-(^,~)}
-Kannada             {(s[0x0C80 - 0x0CFF]['Kannada: '])-(^,~)}
-Malayalam           {(s[0x0D00 - 0x0D7F]['Malayalam: '])-(^,~)}
-Sinhala             {(s[0x0D80 - 0x0DFF]['Sinhala: '])-(^,~)}
-Thai                {(s[0x0E00 - 0x0E7F]['Thai: '])-(^,~)}
-Lao                 {(s[0x0E80 - 0x0EFF]['Lao: '])-(^,~)}
-Tibetan             {(s[0x0F00 - 0x0FFF]['Tibetan: '])-(^,~)}
-Myanmar             {(s[0x1000 - 0x109F]['Myanmar: '])-(^,~)}
-Georgian            {(s[0x10A0 - 0x10FF]['Georgian: '])-(^,~)}
-Hangul_Jamo         {(s[0x1100 - 0x11FF]['Hangul Jamo: '])-(^,~)}
-Ethiopic            {(s[0x1200 - 0x137F]['Ethiopic: '])-(^,~)}
-Ethiopic_Supplement {(s[0x1380 - 0x139F]['Ethiopic Supplement: '])-(^,~)}
-Cherokee            {(s[0x13A0 - 0x13FF]['Cherokee: '])-(^,~)}
-Unified_Can_AS      {(s[0x1400 - 0x167F]['Unified Canadian Aboriginal Syllabics: '])-(^,~)}
-Ogham               {(s[0x1680 - 0x169F]['Ogham: '])-(^,~)}
-Runic               {(s[0x16A0 - 0x16FF]['Runic: '])-(^,~)}
-Tagalog             {(s[0x1700 - 0x171F]['Tagalog: '])-(^,~)}
-Hanunoo             {(s[0x1720 - 0x173F]['Hanunoo: '])-(^,~)}
-Buhid               {(s[0x1740 - 0x175F]['Buhid: '])-(^,~)}
-Tagbanwa            {(s[0x1760 - 0x177F]['Tagbanwa: '])-(^,~)}
-Khmer               {(s[0x1780 - 0x17FF]['Khmer: '])-(^,~)}
-Mongolian           {(s[0x1800 - 0x18AF]['Mongolian: '])-(^,~)}
-Unified_Can_AS_Ext  {(s[0x18B0 - 0x18FF]['Unified Canadian Aboriginal Syllabics Extended: '])-(^,~)}
-Limbu               {(s[0x1900 - 0x194F]['Limbu: '])-(^,~)}
-Tai_Le              {(s[0x1950 - 0x197F]['Tai Le: '])-(^,~)}
-Hiragana            {(s[0x3040 - 0x309F]['Hiragana: '])-(^,~)}
-Katakana            {(s[0x30A0 - 0x30FF]['Katakana: '])-(^,~)}
+HEADER                  {(s['= (INCOMPLETE) UNICODE TABLE ='])(s)-(^,~)}
+s                       {("['==============================\n'])()-(^,~)}
+'Basic Latin: '         {(s[0x0021 - 0x007E][:])-(^,~)}
+'Latin 1 Supplement: '  {(s[0x00A1 - 0x00FF][:])-(^,~)}
+'Latin Extended A: '    {(s[0x0100 - 0x017F][:])-(^,~)}
+'Latin Extended B: '    {(s[0x0180 - 0x024F][:])-(^,~)}
+'IPA Extensions: '      {(s[0x0250 - 0x02AF][:])-(^,~)}
+'Spacing Modifiers: '   {(s[0x02B0 - 0x02FF][:])-(^,~)}
+'Comining Diacritics: ' {(s[0x0300 - 0x036F][:])-(^,~)}
+'Greek Coptic: '        {(s[0x0370 - 0x03FF][:])-(^,~)}
+'Cyrillic: '            {(s[0x0400 - 0x04FF][:])-(^,~)}
+'Cyrillic Supplement: ' {(s[0x0500 - 0x052F][:])-(^,~)}
+'Armenian: '            {(s[0x0530 - 0x058F][:])-(^,~)}
+'Hebrew: '              {(s[0x0590 - 0x05FF][:])-(^,~)}
+'Arabic: '              {(s[0x0600 - 0x06FF][:])-(^,~)}
+'Syriac: '              {(s[0x0700 - 0x074F][:])-(^,~)}
+'Arabic Supplement: '   {(s[0x0750 - 0x077F][:])-(^,~)}
+'Thaana: '              {(s[0x0780 - 0x07BF][:])-(^,~)}
+'NKo: '                 {(s[0x07C0 - 0x07FF][:])-(^,~)}
+'Samaritan: '           {(s[0x0800 - 0x083F][:])-(^,~)}
+'Mandaic: '             {(s[0x0840 - 0x085F][:])-(^,~)}
+'Syriac Supplement: '   {(s[0x0860 - 0x086F][:])-(^,~)}
+'Arabic Extended A: '   {(s[0x08A0 - 0x08FF][:])-(^,~)}
+'Devanagari: '          {(s[0x0900 - 0x097F][:])-(^,~)}
+'Bengali: '             {(s[0x0980 - 0x09FF][:])-(^,~)}
+'Gurmukhi: '            {(s[0x0A00 - 0x0A7F][:])-(^,~)}
+'Gujarati: '            {(s[0x0A80 - 0x0AFF][:])-(^,~)}
+'Oriya: '               {(s[0x0B00 - 0x0B7F][:])-(^,~)}
+'Tamil: '               {(s[0x0B80 - 0x0BFF][:])-(^,~)}
+'Telugu: '              {(s[0x0C00 - 0x0C7F][:])-(^,~)}
+'Kannada: '             {(s[0x0C80 - 0x0CFF][:])-(^,~)}
+'Malayalam: '           {(s[0x0D00 - 0x0D7F][:])-(^,~)}
+'Sinhala: '             {(s[0x0D80 - 0x0DFF][:])-(^,~)}
+'Thai: '                {(s[0x0E00 - 0x0E7F][:])-(^,~)}
+'Lao: '                 {(s[0x0E80 - 0x0EFF][:])-(^,~)}
+'Tibetan: '             {(s[0x0F00 - 0x0FFF][:])-(^,~)}
+'Myanmar: '             {(s[0x1000 - 0x109F][:])-(^,~)}
+'Georgian: '            {(s[0x10A0 - 0x10FF][:])-(^,~)}
+'Hangul Jamo: '         {(s[0x1100 - 0x11FF][:])-(^,~)}
+'Ethiopic: '            {(s[0x1200 - 0x137F][:])-(^,~)}
+'Ethiopic Supplement: ' {(s[0x1380 - 0x139F][:])-(^,~)}
+'Cherokee: '            {(s[0x13A0 - 0x13FF][:])-(^,~)}
+'Unified Can AS: '      {(s[0x1400 - 0x167F][:])-(^,~)}
+'Ogham: '               {(s[0x1680 - 0x169F][:])-(^,~)}
+'Runic: '               {(s[0x16A0 - 0x16FF][:])-(^,~)}
+'Tagalog: '             {(s[0x1700 - 0x171F][:])-(^,~)}
+'Hanunoo: '             {(s[0x1720 - 0x173F][:])-(^,~)}
+'Buhid: '               {(s[0x1740 - 0x175F][:])-(^,~)}
+'Tagbanwa: '            {(s[0x1760 - 0x177F][:])-(^,~)}
+'Khmer: '               {(s[0x1780 - 0x17FF][:])-(^,~)}
+'Mongolian: '           {(s[0x1800 - 0x18AF][:])-(^,~)}
+'Unified Can AS Ext: '  {(s[0x18B0 - 0x18FF][:])-(^,~)}
+'Limbu: '               {(s[0x1900 - 0x194F][:])-(^,~)}
+'Tai Le: '              {(s[0x1950 - 0x197F][:])-(^,~)}
+'Hiragana: '            {(s[0x3040 - 0x309F][:])-(^,~)}
+'Katakana: '            {(s[0x30A0 - 0x30FF][:])-(^,~)}
 
 Template            {(s[][': '])-(^,~)}
