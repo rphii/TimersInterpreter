@@ -59,6 +59,9 @@ Explanation:
 100(~)
 ```
 
+### More Examples
+See [examples](examples) for more examples.
+
 ## The Rules
 
 ### Comments
@@ -219,7 +222,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 - Scopes are recognized by curly brackets: `{}`
 - There are two types of scopes:
 	- Inline scopes, that are always nameless and shall be within a function of time, e.g. `(IN HERE)`.
-	- Names scopes, that are always named and shall be outside function of times, e.g. `OVER HERE ()`
+	- Named scopes, that are always named and shall be outside function of times, e.g. `OVER HERE ()`
 
 #### Inline Scopes
 - The quickest way to easily change scopes is by using inline scopes, as those are automatically entered.
@@ -230,7 +233,8 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 - Entering any kind of scope starts a new timer, with the value of 0.
 - Exiting any kind of scope happens when there is no timer left.
 - A function name can be any literal or string, e.g. `name{}`, `'scope name'{}` (note the string + space), and even `😁😀{}` are valid scope names. It can also start with numbers and whatnot.
-- It doesn't matter hot much whitespace is between the name and the `{}`.
+- It doesn't matter hot much whitespace is between the name and the `{}`, the name is always
+  attached to the next scope.
 - You can have nested scopes. For each nesting, only unique scope names are allowed. This means that you can have equal scope names, if they reside on different nestings.
 
 #### Calling Scopes
