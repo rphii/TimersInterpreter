@@ -150,7 +150,7 @@ Dividing (or modulo) by zero brings some consequences with it:
 
 - Applies to: Current scope only
 - It destroys all (to the scope known) spacetime, therefore code gets terminated immediately and all timers (within that scope) blend together.
-- Realities are shuffled through and the sole remaining timer takes a random value out of all the possibilities within that scope, except for the max. count any timer can have.
+- Realities are shuffled through and the sole remaining timer takes a random value out of all the possibilities within that scope.
 - TL;DR Randomize. (The non-dramatic version)
 
 ### Modifiers
