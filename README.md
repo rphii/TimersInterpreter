@@ -207,7 +207,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 
 ### Time Functions
 - Use any of the special operations used within the section [new](#New) in combination with [modifiers](#Modifiers). However, the numbers shall not be placed in square brackets, but before a pair of round brackets, e.g.  `HERE()`. 
-- Within the `[)` is the actual function body, where commands ([operations](#Operations)) are executed character for character.
+- Within the `()` is the actual function body, where commands ([operations](#Operations)) are executed character for character.
 - You can have up to one line break (and any amount of horizontal whitespace) that a number is associated to a function of time. Otherwise, if no number can be associated to a function of time, default to 0.
 - All matching [time function](#Time-Functions) are executed if any timer with it's current value matches any of it's number(s).
 
