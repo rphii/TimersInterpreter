@@ -1,8 +1,8 @@
 #ifndef COLORPRHINT_H
 
+#ifndef COLORPRINT_DISABLE
 #define F(msg,fmt) "\033["fmt"m"msg"\033[0m"
 
-#ifndef COLORPRINT_DISABLE
 #define BOLD    ";1"     /* bold */
 #define IT      ";3"     /* italic */
 #define UL      ";4"     /* underline */
@@ -48,6 +48,7 @@
 #define BG_WT_B ";107"    /* white */
 
 #else
+#define F(msg,fmt) msg
 
 #define BOLD 
 #define IT   
