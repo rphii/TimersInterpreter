@@ -6,11 +6,13 @@ CFLAGS  := -Wall -Wextra -Wimplicit \
 		   -Wno-unused-parameter \
 		   -Wconversion \
 		   -O3 -march=native \
+		   -DCOLORPRINT_DISABLE \
 		   ##############\
+		   -fsanitize=address -rdynamic \
+		   -pg -rdynamic \
 		   -O2 \
 		   -O0 -g \
 		   -rdynamic -Og -ggdb3 \
-		   -fsanitize=address \
 		   -DCOLORPRINT_DISABLE \
 		   -Werror \
 		   -Warith-conversion \
@@ -24,6 +26,8 @@ CFLAGS  := -Wall -Wextra -Wimplicit \
 LDFLAGS := \
 		   -lm \
 		   ##############\
+		   -fsanitize=address -rdynamic \
+		   -pg -rdynamic \
 		   -rdynamic -ggdb3 \
 		   -fsanitize=address \
 		   -pg \

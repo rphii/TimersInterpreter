@@ -110,7 +110,8 @@ void print_help(Args *args)
     if(!args) return;
     int err = 0;
     Str ts = {0};
-    print_line(args->tabs.max, 0, 0, &STR(F("timers:", BOLD)" command-line interpreter for the Timers language.\n\n"));
+    print_line(args->tabs.max, 0, 0, &STR(F("timers:", BOLD)" command-line interpreter for the Timers language."));
+    printf("\n\n");
     print_line(args->tabs.max, 0, 0, &STR("Usage:\n"));
     print_line(args->tabs.max, args->tabs.main, args->tabs.main, &STR("timers [options] [file]\n"));
     //PRINTF_TABBED(args->tabs.main, "timers [options]\n");
