@@ -5,7 +5,7 @@
 #include "str.h"
 #include "colorprint.h"
 
-static size_t platform_static_str_display_len(Str *str)
+static inline size_t platform_static_str_display_len(Str *str)
 {
     if(!str) return 0;
     size_t actual_len = 0;
@@ -134,7 +134,7 @@ error: ERR_CLEAN;
     #include <time.h>
 // https://stackoverflow.com/questions/322938/recommended-way-to-initialize-srand
 // Robert Jenkins' 96 bit Mix Function
-static unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
+static inline unsigned long mix(unsigned long a, unsigned long b, unsigned long c)
 {
     a=a-b;  a=a-c;  a=a^(c >> 13);
     b=b-c;  b=b-a;  b=b^(a << 8);

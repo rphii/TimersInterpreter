@@ -11,7 +11,7 @@
 /* PRIVATE FUNCTION IMPLEMENTATIONS *******************************************/
 /******************************************************************************/
 
-static int parse_static_recall_index(Ast *node, size_t *index)
+ErrDeclStatic parse_static_recall_index(Ast *node, size_t *index)
 {
     if(!index) THROW(ERR_SIZE_T_POINTER);
     if(!node) THROW(ERR_AST_POINTER);
@@ -27,7 +27,7 @@ error:
     return -1;
 }
 
-static int parse_static_leftopened(Lex *lex, size_t index, Ast *node)
+ErrDeclStatic parse_static_leftopened(Lex *lex, size_t index, Ast *node)
 {
     bool err_nest = false;
     size_t found_new = false;
@@ -101,7 +101,7 @@ error:
     return -1;
 }
 
-static int parse_static_increment_index(size_t *index)
+ErrDeclStatic parse_static_increment_index(size_t *index)
 {
     if(!index) THROW(ERR_SIZE_T_POINTER);
     (*index)++;
@@ -110,7 +110,7 @@ error:
     return -1;
 }
 
-static int parse_static_int(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_int(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -136,7 +136,7 @@ error:
     return -1;
 }
 
-static int parse_static_fnum(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_fnum(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -157,7 +157,7 @@ error:
     return -1;
 }
 
-static int parse_static_top(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_top(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -176,7 +176,7 @@ error:
     return -1;
 }
 
-static int parse_static_below(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_below(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -195,7 +195,7 @@ error:
     return -1;
 }
 
-static int parse_static_empty(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_empty(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -209,7 +209,7 @@ error:
     return -1;
 }
 
-static int parse_static_num(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_num(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -248,7 +248,7 @@ error:
     return -1;
 }
 
-static int parse_static_match(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_match(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -270,7 +270,7 @@ error:
     return -1;
 }
 
-static int parse_static_term(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_term(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -618,7 +618,7 @@ error:
     return -1;
 }
 
-static int parse_static_new(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_new(Lex *lex, size_t *index, Ast **node)
 {
     bool err_nest = false;
     bool add_expr = false;
@@ -690,7 +690,7 @@ error:
     return -1;
 }
 
-static int parse_static_func_call(Lex *lex, size_t *index, Ast **node, bool *whitespace_sensitive)
+ErrDeclStatic parse_static_func_call(Lex *lex, size_t *index, Ast **node, bool *whitespace_sensitive)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -726,7 +726,7 @@ error:
     return -1;
 }
 
-static int parse_static_str(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_str(Lex *lex, size_t *index, Ast **node)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -764,7 +764,7 @@ error:
     return -1;
 }
 
-static int parse_static_statement(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_statement(Lex *lex, size_t *index, Ast **node)
 {
     bool err_nest = false;
     bool add_stmnt = false;
@@ -861,7 +861,7 @@ error:
     return -1;
 }
 
-static int parse_static_func_time(Lex *lex, size_t *index, Ast **node, bool *newline_sensitive)
+ErrDeclStatic parse_static_func_time(Lex *lex, size_t *index, Ast **node, bool *newline_sensitive)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!index) THROW(ERR_SIZE_T_POINTER);
@@ -927,7 +927,7 @@ error:
     return -1;
 }
 
-static int parse_static_scope(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_scope(Lex *lex, size_t *index, Ast **node)
 {
     bool err_def = false;
     if(!lex) THROW(ERR_LEX_POINTER);
@@ -1024,7 +1024,7 @@ error:
     return -1;
 }
 
-static int parse_static_scope_def(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_scope_def(Lex *lex, size_t *index, Ast **node)
 {
     bool err_nest = false;
     if(!lex) THROW(ERR_LEX_POINTER);
@@ -1111,7 +1111,7 @@ error:
     return -1;
 }
 
-static int parse_static_program(Lex *lex, size_t *index, Ast **node)
+ErrDeclStatic parse_static_program(Lex *lex, size_t *index, Ast **node)
 {
     bool err_def = false;
     if(!lex) THROW(ERR_LEX_POINTER);
@@ -1187,7 +1187,7 @@ error:
 }
 
 
-static int parse_static_optimize_new_fnew(Ast *root, AstIDList id)
+ErrDeclStatic parse_static_optimize_new_fnew(Ast *root, AstIDList id)
 {
     if(!root) THROW(ERR_AST_POINTER);
     INFO("=== OPTIMIZE NEW/FNEW ===");

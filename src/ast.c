@@ -9,7 +9,7 @@ static int ast_static_child_get_shadowed(Ast *node, size_t index, Ast **child);
 /* PRIVATE FUNCTION IMPLEMENTATIONS *******************************************/
 /******************************************************************************/
 
-static int ast_static_child_update_parent(Ast *parent)
+ErrDeclStatic ast_static_child_update_parent(Ast *parent)
 {
     if(!parent) THROW("expected pointer to node");
     size_t arrc = parent->arrc;
@@ -32,7 +32,7 @@ error:
     return -1;
 }
 
-static int ast_static_child_get_shadowed(Ast *node, size_t index, Ast **child)
+ErrDeclStatic ast_static_child_get_shadowed(Ast *node, size_t index, Ast **child)
 {
     if(!node) THROW("expected pointer to ast struct");
     if(!child) THROW("expected pointer to child struct");
@@ -57,7 +57,7 @@ static size_t ast_static_arr_pos(Ast *node)
     return node->arri;
 }
 
-static int ast_static_free_range(Ast *clear, size_t iE, bool final_clean)
+ErrDeclStatic ast_static_free_range(Ast *clear, size_t iE, bool final_clean)
 {
     if(!clear) THROW("expected pointer to an ast struct");
     if(iE) {

@@ -60,7 +60,7 @@ error:
     return -1;
 }
 
-static void execute_static_swap(VecVal *stack, size_t from)
+static inline void execute_static_swap(VecVal *stack, size_t from)
 {
     assert(stack);
     if(!stack) return;

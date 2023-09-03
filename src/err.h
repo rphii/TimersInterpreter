@@ -17,7 +17,7 @@
 
 /* use this when declaring function that can error */
 #define ErrDecl             ATTR_NODISCARD int
-#define ErrDeclStatic       ATTR_NODISCARD static int
+#define ErrDeclStatic       ATTR_NODISCARD static inline int
 
 #define ERR_CLEAN           do { err = -1; goto clean; } while(0)
 

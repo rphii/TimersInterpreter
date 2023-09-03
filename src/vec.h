@@ -177,7 +177,7 @@ typedef enum
     }
 
 #define VEC_IMPLEMENT_BY_VAL_STATIC_SHRINK_BACK(N, A, T, F) \
-    static int A##_static_shrink_back(N *vec) \
+    static inline int A##_static_shrink_back(N *vec) \
     { \
         assert(vec); \
         size_t cap = vec->cap; \
@@ -200,7 +200,7 @@ typedef enum
     }
 
 #define VEC_IMPLEMENT_BY_VAL_STATIC_SHRINK_FRONT(N, A, T, F) \
-    static void A##_static_shrink_front(N *vec) \
+    static inline void A##_static_shrink_front(N *vec) \
     { \
         assert(vec); \
         size_t first = vec->first; \
@@ -287,7 +287,7 @@ typedef enum
 
 /* implementation for both */
 #define VEC_IMPLEMENT_COMMON_STATIC_ZERO(N, A, T, F) \
-    static void A##_static_zero(N *vec) \
+    static inline void A##_static_zero(N *vec) \
     { \
         assert(vec); \
         vec_memset(vec, 0, sizeof(*vec)); \

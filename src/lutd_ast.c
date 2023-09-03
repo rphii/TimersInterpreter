@@ -3,7 +3,7 @@
 #include "err.h"
 #include "trace.h"
 
-static int lutd_ast_static_cmp_impl(Ast *a, Ast *b)
+static inline int lutd_ast_static_cmp_impl(Ast *a, Ast *b)
 {
     if(a->id != AST_ID_STR) {
         ABORT("expected %s, is %s", ast_id_str(AST_ID_STR), ast_id_str(a->id));
@@ -18,7 +18,7 @@ error:
     exit(-1);
 }
 
-static size_t lutd_ast_static_hash_impl(Ast *a)
+static inline size_t lutd_ast_static_hash_impl(Ast *a)
 {
     size_t hash = 5381;
     if(a->id != AST_ID_STR) {
