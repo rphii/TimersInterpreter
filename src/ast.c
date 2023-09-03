@@ -547,7 +547,8 @@ void ast_free(Ast *ast, bool keep_current_id, bool final_clean)
     Ast *stop = ast;
     Ast *prev = ast;
     bool exit_pls = 0;
-    do {
+    TRY(ast_next(&ast, &ast_layer), "failed getting next");
+    while(ast_layer > 0) {
         TRY(ast_next(&ast, &ast_layer), "failed getting next");
         if(ast_layer < prev_layer) {
             prev = prev->parent;
@@ -572,7 +573,7 @@ void ast_free(Ast *ast, bool keep_current_id, bool final_clean)
         }
         prev = ast;
         prev_layer = ast_layer;
-    } while(ast_layer > 0);
+    }
     if(keep_current_id) {
         stop->id = copy.id;
         stop->parent = copy.parent;
