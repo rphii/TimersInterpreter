@@ -10,16 +10,16 @@
 /* PRIVATE FUNCTION PROTOTYPES ************************************************/
 /******************************************************************************/
 
-static int lex_static_cap_ensure(Lex *lis, size_t cap);
-static int lex_static_append(Lex *lis, LexItem *li);
-static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li);
+ErrDeclStatic lex_static_cap_ensure(Lex *lis, size_t cap);
+ErrDeclStatic lex_static_append(Lex *lis, LexItem *li);
+ErrDeclStatic lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li);
 static void lex_hint_item(FILE *file, LexItem *item, Str *stream, Str *fn);
 
 /******************************************************************************/
 /* PRIVATE FUNCTION IMPLEMENTATIONS *******************************************/
 /******************************************************************************/
 
-static int lex_static_cap_ensure(Lex *lex, size_t cap)
+ErrDeclStatic lex_static_cap_ensure(Lex *lex, size_t cap)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(cap) {
@@ -42,7 +42,7 @@ error:
     return -1;
 }
 
-static int lex_static_append(Lex *lex, LexItem *li)
+ErrDeclStatic lex_static_append(Lex *lex, LexItem *li)
 {
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!li) THROW(ERR_LEXITEM_POINTER);
@@ -67,7 +67,7 @@ error:
     return 1;
 }
 
-static int lex_static_search_def(Str *stream, size_t i, bool *found)
+ErrDeclStatic lex_static_search_def(Str *stream, size_t i, bool *found)
 {
     if(!stream) THROW(ERR_STR_POINTER);
     if(!found) THROW(ERR_BOOL_POINTER);
@@ -85,7 +85,7 @@ error:
     return -1;
 }
 
-static int lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
+ErrDeclStatic lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *li)
 {
     int err = 0;
     bool err_esc = false;
@@ -271,7 +271,7 @@ error:
     ERR_CLEAN;
 }
 
-static int lex_static_get_octal(char **s, Str *esc)
+ErrDeclStatic lex_static_get_octal(char **s, Str *esc)
 {
     int err = 0;
     Str str_val = {0};
@@ -295,7 +295,7 @@ clean:
 error: ERR_CLEAN;
 }
 
-static int lex_static_get_hex(char **s, Str *esc, size_t num)
+ErrDeclStatic lex_static_get_hex(char **s, Str *esc, size_t num)
 {
     int err = 0;
     Str str_val = {0};
@@ -554,7 +554,7 @@ error:
     (void)lex; /* gets rid of warning */
 }
 
-static void lex_hint_item(FILE *file, LexItem *item, Str *stream, Str *fn)
+static inline void lex_hint_item(FILE *file, LexItem *item, Str *stream, Str *fn)
 {
     int err = 0;
     Str line = {0};

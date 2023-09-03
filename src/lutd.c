@@ -202,7 +202,7 @@
 /* FUNCTION IMPLEMENTATIONS ***************************************************/
 /******************************************************************************/
 
-static size_t lutd_size_static_hash(size_t v)
+static inline size_t lutd_size_static_hash(size_t v)
 {
     int width = 16;
     return (v * 14695981039346656037UL) >> ((8 * sizeof(v)) - width);

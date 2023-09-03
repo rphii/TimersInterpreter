@@ -250,7 +250,7 @@ error: ERR_CLEAN;
 
 #if 0
 #define ERR_TIMERS_GET_VAL_ID  "failed to get val and id"
-static int timers_static_get_val_id(TimersNewItem *tn, Ast *node, AstBranch *val, AstIDList *id)
+static inline int timers_static_get_val_id(TimersNewItem *tn, Ast *node, AstBranch *val, AstIDList *id)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     if(!node) THROW(ERR_AST_POINTER);
@@ -291,7 +291,7 @@ error:
 }
 
 #define ERR_TIMERS_TN_SET_RECENT    "failed to set new timer recent"
-static int timers_static_tn_set_recent(TimersNewItem *tn, AstBranch *val, AstIDList id)
+static inline int timers_static_tn_set_recent(TimersNewItem *tn, AstBranch *val, AstIDList id)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     if(!val) THROW(ERR_AST_BRANCH_POINTER);
@@ -304,7 +304,7 @@ error:
 }
 
 #define ERR_TIMERS_TN_SET_RANGE   "failed to set new timer range"
-static int timers_static_tn_set_range(TimersNewItem *tn, AstBranch *val, AstIDList id)
+static inline int timers_static_tn_set_range(TimersNewItem *tn, AstBranch *val, AstIDList id)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     if(!val) THROW(ERR_AST_BRANCH_POINTER);
@@ -347,7 +347,7 @@ error:
 }
 
 #define ERR_TIMERS_TN_SET_SEQUENCE  "failed to set new timer sequence"
-static int timers_static_tn_set_sequence(TimersNewItem *tn, AstBranch *val, AstIDList id)
+static inline int timers_static_tn_set_sequence(TimersNewItem *tn, AstBranch *val, AstIDList id)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     size_t *t_a = &tn->t[TIMERS_NEW_A].num;
@@ -378,7 +378,7 @@ error:
 }
 
 #define ERR_TIMERS_TN_SET_TIMES   "failed to set new timer times"
-static int timers_static_tn_set_times(TimersNewItem *tn, AstBranch *val, AstIDList id)
+static inline int timers_static_tn_set_times(TimersNewItem *tn, AstBranch *val, AstIDList id)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     if(!val) THROW(ERR_AST_BRANCH_POINTER);
@@ -415,7 +415,7 @@ error:
 }
 
 #define ERR_TIMERS_TN_SET_NUM   "failed to set new timer num"
-static int timers_static_tn_set_num(TimersNewItem *tn, AstBranch *val, AstIDList id)
+static inline int timers_static_tn_set_num(TimersNewItem *tn, AstBranch *val, AstIDList id)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     if(!val) THROW(ERR_AST_BRANCH_POINTER);
@@ -454,7 +454,7 @@ void timers_new_print(TimersNewItem *tn)
     (b) ^= (a); \
     (a) ^= (b); } while(0)
 
-static int timers_static_tn_sort_range(TimersNewItem *tn)
+static inline int timers_static_tn_sort_range(TimersNewItem *tn)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     size_t *t_a = &tn->t[TIMERS_NEW_A].num;
@@ -474,7 +474,7 @@ error:
 }
 
 #define ERR_TIMERS_TN_CLEAR     "failed to clear new timer"
-static int timers_static_tn_clear(TimersNewItem *tn)
+static inline int timers_static_tn_clear(TimersNewItem *tn)
 {
     if(!tn) THROW(ERR_TIMERSNEW_POINTER);
     memset(&tn, 0, sizeof(tn));
