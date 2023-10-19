@@ -195,7 +195,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 - If there is a chain of values, e.g. `2*3*5*7` it will automatically assume that the programmer wants this instead `2*3|2*5|2*7`
 - An exponential sequence is $$v_i=(v_\text{base}+i)^{v_\text{step}}$$ where $v_i$ is the i-th value of the sequence, $v_\text{base}$ the first and $v_\text{step}$ the second value.
 - Optionally, one can specify an inclusive upper limit with a range modifier, e.g. `1*3-100` is synonymous to `1|8|27|64`.
-- Optionally, one can specify a times modifier, e.g. `1+3#10` is synonymous to `1|8|27|64|125|216|343|512|729|1000`. (which will consider up to 10 values, as specified by that 10)
+- Optionally, one can specify a times modifier, e.g. `1*3#10` is synonymous to `1|8|27|64|125|216|343|512|729|1000`. (which will consider up to 10 values, as specified by that 10)
 - You can't use both modifiers at the same time.
 - If the left side is not specified, default to 0.
 - If the right side is not specified, default to left item.
@@ -209,7 +209,7 @@ Modifiers can be used in [new](#New) or for [time functions](#Time-Functions).
 - If the right side is not specified, default to left item.
 
 ### Time Functions
-- Use any of the special operations used within the section [new](#New) in combination with [modifiers](#Modifiers). However, the numbers shall not be placed in square brackets, but before a pair of round brackets, e.g.  `HERE()`. 
+- Use any of the special operations used within the section [new](#New) in combination with [modifiers](#Modifiers). However, the numbers shall not be placed in square brackets, but before a pair of round brackets, e.g.  `HERE()`.
 - Within the `()` is the actual function body, where commands ([operations](#Operations)) are executed character for character.
 - You can have up to one line break (and any amount of horizontal whitespace) that a number is associated to a function of time. Otherwise, if no number can be associated to a function of time, default to 0.
 - All matching [time function](#Time-Functions) are executed if any timer with it's current value matches any of it's number(s).
@@ -253,4 +253,7 @@ res: _~                       '  // reserved due to reasons
 seq:           #    +-*      |
 new:   ^$\:;.," `?&@   /=%><!
 ```
+
+### Broken Things
+- `nest.tim` should be interpretable and not raise an error (I THINK)
 
