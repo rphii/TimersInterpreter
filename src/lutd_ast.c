@@ -16,6 +16,7 @@ static inline int lutd_ast_static_cmp_impl(Ast *a, Ast *b)
 error:
     trace_print();
     exit(-1);
+    return 0; /* get rid of warning from tcc */
 }
 
 static inline size_t lutd_ast_static_hash_impl(Ast *a)
@@ -33,6 +34,7 @@ static inline size_t lutd_ast_static_hash_impl(Ast *a)
 error:
     trace_print();
     exit(-1);
+    return 0; /* get rid of warning from tcc */
 }
 
 

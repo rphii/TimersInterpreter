@@ -128,6 +128,7 @@ char str_at(Str *str, size_t index)
     return ch;
 error:
     exit(-1);
+    return 0; /* suppress warning from tcc */
 }
 
 int str_cap_ensure(Str *str, size_t cap)
