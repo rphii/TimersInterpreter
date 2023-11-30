@@ -8,7 +8,18 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+/* inclusion and configuration of vector */
 #include "str.h"
+
+#define VEC_SETTINGS_DEFAULT_SIZE STR_DEFAULT_SIZE
+#define VEC_SETTINGS_KEEP_ZERO_END 1
+#define VEC_SETTINGS_STRUCT_ITEMS s
+#define VEC_SETTINGS_STRUCT_LAST l
+#define VEC_SETTINGS_STRUCT_CAP c
+
+VEC_IMPLEMENT(Str, str, char, BY_VAL, 0);
+
+
 #include "trace.h"
 
 //////////////////////////////////////
@@ -29,6 +40,7 @@ error:
     return 0;
 }
 
+#if 1
 int str_app(Str *str, char *format, ...)
 {
     if(!str) THROW(ERR_STR_POINTER);
@@ -43,17 +55,17 @@ int str_app(Str *str, char *format, ...)
     va_end(argp);
     // calculate required memory
     size_t len_new = str->l + len_app + 1;
-    size_t required = str->c ? str->c : STR_DEFAULT_BLOCKSIZE;
+    size_t required = str->cap ? str->cap : STR_DEFAULT_BLOCKSIZE;
     while(required < len_new) required = required << 1;
     // make sure to have enough memory
-    if(required > str->c)
+    if(required > str->cap)
     {
         char *temp = realloc(str->s, required);
         // safety check
         // apply address and set new allocd
         if(!temp) THROW("failed to realloc");
         str->s = temp;
-        str->c = required;
+        str->cap = required;
     }
     // actual append
     va_start(argp, format);
@@ -69,6 +81,37 @@ int str_app(Str *str, char *format, ...)
 error:
     return -1;
 }
+#else
+int str_fmt(Str *str, char *format, ...)
+{
+    if(!str) return -1;
+    if(!format) return -1;
+    // calculate length of append string
+    va_list argp;
+    va_start(argp, format);
+    size_t len_app = (size_t)vsnprintf(0, 0, format, argp);
+    if((int)len_app < 0) {
+        return -1;
+    }
+    va_end(argp);
+    // calculate required memory
+    size_t len_new = str->l + len_app;
+    if(str_reserve(str, len_new)) {
+        return -1;
+    }
+    // actual append
+    va_start(argp, format);
+    int len_chng = vsnprintf(&(str->s)[str->l], len_app + 1, format, argp);
+    va_end(argp);
+    // check for success
+    if(len_chng >= 0 && (size_t)len_chng <= len_app) {
+        str->l += (size_t)len_chng; // successful, change length
+    } else {
+        return -1;
+    }
+    return 0;
+}
+#endif
 
 #include <assert.h>
 #include "trace.h"
@@ -92,16 +135,16 @@ int str_cap_ensure(Str *str, size_t cap)
     if(!str) THROW(ERR_STR_POINTER);
     if(cap) {
         /* calculate required memory */
-        size_t required = str->c ? str->c : STR_DEFAULT_BLOCKSIZE;
+        size_t required = str->cap ? str->cap : STR_DEFAULT_BLOCKSIZE;
         while(required < cap) required *= 2;
         INFO("required %zu < cap %zu", required, cap);
 
         /* only increase capacity */
-        if(required > str->c) {
+        if(required > str->cap) {
             void *temp = realloc(str->s, sizeof(*str->s) * cap);
             if(!temp) THROW("could not increase capacity of string");
             str->s = temp;
-            str->c = required;
+            str->cap = required;
         }
     }
     return 0;
@@ -198,7 +241,7 @@ void str_free_single(Str *str)
     if(!str) return;
     free(str->s);
     str->s = 0;
-    str->c = 0;
+    str->cap = 0;
     str->l = 0;
 }
 

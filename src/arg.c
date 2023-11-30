@@ -1,9 +1,12 @@
 #include <ctype.h>
 
-#include "arg.h"
-#include "err.h"
 #include "str.h"
+
 #include "vec.h"
+#include "arg.h"
+VEC_IMPLEMENT(VecStr, vec_str, Str, BY_REF, str_free_single);
+
+#include "err.h"
 #include "file.h"
 #include "platform.h"
 
@@ -62,7 +65,6 @@ _Static_assert((sizeof(static_explained) / sizeof(*static_explained)) == ARG__CO
 _Static_assert((sizeof(static_specify) / sizeof(*static_specify)) == ARG__COUNT, "missing argument specification");
 _Static_assert((sizeof(static_specify_str) / sizeof(*static_specify_str)) == SPECIFY__COUNT, "missing argument specification string");
 
-VEC_IMPLEMENT(VecStr, vec_str, Str, BY_REF, str_free_single);
 
 int print_line(int max, int current, int tabs, Str *str)
 {
@@ -71,7 +73,7 @@ int print_line(int max, int current, int tabs, Str *str)
     int printed = 0;
     int length = 0;
     char *until = 0;
-    for(size_t i = 0; i < str->l; i += (size_t)length) { 
+    for(size_t i = 0; i < str->l; i += (size_t)length) {
         //bool skipped_space = false;
         while(isspace((int)str->s[i])) {
             //skipped_space = true;
@@ -313,7 +315,7 @@ ErrDeclStatic arg_static_read_merge_list(Args *args, const char *filename)
         if(iE > i0) {
             while(isspace((int)s[i0])) {
                 i0++;
-            } 
+            }
             if(i0 < iE) {
                 if(s[i0] != '#') {
                     memset(&temp, 0, sizeof(temp));
@@ -323,7 +325,7 @@ ErrDeclStatic arg_static_read_merge_list(Args *args, const char *filename)
                     } else if(s[i0] == '"' || s[iE] == '"') {
                         THROW("expected end and beginning '\"'");
                     } else while(iE && isspace((int)s[iE - 1])) iE--;
-                    TRY(str_app(&temp, "%.*s%c%.*s", 
+                    TRY(str_app(&temp, "%.*s%c%.*s",
                                 (int)(last_subdir), filename,
                                 PLATFORM_CH_SUBDIR,
                                 (int)(iE - i0), &s[i0]), ERR_STR_APP);
@@ -403,7 +405,7 @@ ErrDecl arg_parse(Args *args, int argc, const char **argv)
                     }
                 }
                 if(unknown_args) {
-                    TRY(arg_static_specific_option(args, j, sg->s[0]), ERR_ARG_SPECIFIC_OPTION); 
+                    TRY(arg_static_specific_option(args, j, sg->s[0]), ERR_ARG_SPECIFIC_OPTION);
                     unknown_args = false;
                 }
             } else if(arg_len == cmp_len) {
