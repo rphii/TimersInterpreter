@@ -6,8 +6,8 @@ CFLAGS  := -Wall -Wextra -Wimplicit \
 		   -Wno-unused-parameter \
 		   -Wconversion \
 		   -O3 -march=native \
-		   -DCOLORPRINT_DISABLE \
 		   ##############\
+		   -DCOLORPRINT_DISABLE \
 		   -fsanitize=address -rdynamic \
 		   -pg -rdynamic \
 		   -O2 \
@@ -31,7 +31,7 @@ LDFLAGS := \
 		   -rdynamic -ggdb3 \
 		   -fsanitize=address \
 		   -pg \
-		   -rdynamic -Og -ggdb3 
+		   -rdynamic -Og -ggdb3
 CSUFFIX	:= .c
 HSUFFIX	:= .h
 
@@ -69,7 +69,7 @@ $(TARGET): $(O_FILES) | $(TRG_DIR)
 # compile all .c Files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%$(CSUFFIX) Makefile | $(OBJ_DIR)
 	@echo compile : $<
-	@$(CC) $(CFLAGS) -c -DVERSION=\"$(GIT_VERSION)\" -MMD -MP -o $@ $<
+	@$(CC) $(CFLAGS) -c -DVERSION=\"$(GIT_VERSION)\" -MMD -o $@ $<
 
 # create directories if they don't exist
 # .o dir

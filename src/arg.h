@@ -1,6 +1,7 @@
 #ifndef CLI_H
 
-#include <stdbool.h> 
+#include <stdbool.h>
+
 #include "str.h"
 VEC_INCLUDE(VecStr, vec_str, Str, BY_REF);
 

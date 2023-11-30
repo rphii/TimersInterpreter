@@ -25,10 +25,7 @@
 #define STR_L(x)                (Str){.s = x, .l = strlen(x)}
 
 #define str_new(str)  Str str = {0}
-#define str_free(...)   do { \
-    for(size_t i = 0; i < SIZE_ARRAY(((Str []){__VA_ARGS__})); i++) \
-        str_free_single(&((Str []){__VA_ARGS__})[i]); \
-    } while(0)
+
 #define str_free_p(...) do { \
     for(size_t i = 0; i < SIZE_ARRAY(((Str []){__VA_ARGS__})); i++) \
         str_free_single(((Str []){__VA_ARGS__})[i]); \
@@ -44,11 +41,27 @@
 // STRUCTS //
 /////////////
 
-typedef struct Str {
-    char *s;    /* string */
-    size_t l;   /* length */
-    size_t c;   /* capacity */
-} Str;
+#define STR_DEFAULT_SIZE 32
+
+/* configuration, inclusion and de-configuration of vector */
+
+#define VEC_SETTINGS_DEFAULT_SIZE STR_DEFAULT_SIZE
+#define VEC_SETTINGS_KEEP_ZERO_END 1
+#define VEC_SETTINGS_STRUCT_ITEMS s
+#define VEC_SETTINGS_STRUCT_LAST l
+#define VEC_SETTINGS_STRUCT_CAP c
+#include "vec.h"
+
+VEC_INCLUDE(Str, str, char, BY_VAL);
+
+#undef VEC_SETTINGS_STRUCT_ITEMS
+#undef VEC_SETTINGS_KEEP_ZERO_END
+#undef VEC_SETTINGS_DEFAULT_SIZE
+#undef VEC_SETTINGS_STRUCT_LAST
+#undef VEC_SETTINGS_STRUCT_CAP
+
+/* other functions */
+
 
 ////////////////////////////////
 // PUBLIC FUNCTION PROTOTYPES //

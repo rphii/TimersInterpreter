@@ -44,11 +44,11 @@ ErrDeclStatic execute_static_operation(Scope *scope, VecVal *stack, char op)
             case LEX_CH_CMP_LT: { res = (v1 < v2); } break;
             case LEX_CH_CMP_EQ: { res = (v1 == v2); } break;
             case LEX_CH_DIV:    {
-                if(!v1) { scope->randomize = true; } 
+                if(!v1) { scope->randomize = true; }
                 else { res = (v2 / v1) & VAL_MAX; }
             } break;
             case LEX_CH_MOD:    {
-                if(!v1) { scope->randomize = true; } 
+                if(!v1) { scope->randomize = true; }
                 else { res = (v2 % v1) & VAL_MAX; }
             } break;
             default: THROW("unimplemented operation: '%c'", op);
@@ -215,7 +215,7 @@ ErrDeclStatic execute_static_cmd(Run *run, Scope *scope, char cmd, bool ignore_w
         //case LEX_CH_CODE: {
         //} break;
         case LEX_CH_GET_INT: {
-            /* TODO make this function on like... the ranges etc...!!! 
+            /* TODO make this function on like... the ranges etc...!!!
              * or: algernatively, just add or try to add a new command???
              * TODO 2: skip whitespaces or not? useful for when entering
              * things like: '98 99 100 101 102'
@@ -259,11 +259,11 @@ ErrDeclStatic execute_static_cmd(Run *run, Scope *scope, char cmd, bool ignore_w
             execute_static_swap(stack, len);
             touched_stack = true;
         } break;
-        case LEX_CH_ADD: 
-        case LEX_CH_SUB: 
-        case LEX_CH_MUL: 
-        case LEX_CH_DIV: 
-        case LEX_CH_MOD: 
+        case LEX_CH_ADD:
+        case LEX_CH_SUB:
+        case LEX_CH_MUL:
+        case LEX_CH_DIV:
+        case LEX_CH_MOD:
         case LEX_CH_CMP_GT:
         case LEX_CH_CMP_LT:
         case LEX_CH_CMP_EQ: {
@@ -297,7 +297,7 @@ ErrDeclStatic execute_static_cmd(Run *run, Scope *scope, char cmd, bool ignore_w
         stack_print(stack);
     }
 clean:
-    str_free(input);
+    str_free(&input);
     return err;
 error: ERR_CLEAN;
 }
@@ -388,7 +388,7 @@ ErrDeclStatic execute_static_func_call(Run *run, Scope *scope, Ast *node)
      * we try to create the longest string. example:
      * - stack : 12+3
      * - code commands : (function?x?x?)
-     * - will result in : 
+     * - will result in :
      *   - call : function1x2x
      *   - if stack is unchanged (else just new top of stack), cmd : +
      */

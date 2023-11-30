@@ -152,7 +152,7 @@ ErrDeclStatic lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *l
                     while(strchr(LEX_HEX, (int)*goalptr)) goalptr++;
                 }
                 realend = goalptr;
-                while(!(realend && (isspace((int)*realend) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*realend)))) { 
+                while(!(realend && (isspace((int)*realend) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*realend)))) {
                     realend++;
                 }
                 TRY(str_app(&temp, "%.*s", (int)(goalptr - s), s), ERR_STR_APP);
@@ -180,7 +180,7 @@ ErrDeclStatic lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *l
                         THROW("number out of range");
                     } else if(realend != goalptr) {
                         realend = s; /* recalculate this just in case idk which case this would actually trigger */
-                        while(!(realend && (isspace((int)*realend) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*realend)))) { 
+                        while(!(realend && (isspace((int)*realend) || strchr(LEX_SEPARATORS LEX_OPERATORS LEX_STR_STRING, (int)*realend)))) {
                             realend++;
                         }
                         err_esc = true;
@@ -253,7 +253,7 @@ ErrDeclStatic lex_static_extract_next(Str *stream, Str *fn, size_t i, LexItem *l
             //if(li->l == 1 && li->str.s[0] == LEX_CH_LEFTOVER) {
             //    li->id = LEX_ID_OPERATOR;
             //}
-        } 
+        }
     } else {
         li->id = LEX_ID_END;
     }
@@ -290,7 +290,7 @@ ErrDeclStatic lex_static_get_octal(char **s, Str *esc)
     if(errno) THROW("number out of range");
     TRY(str_app(esc, "%c", (char)num), ERR_STR_APP);
 clean:
-    str_free(str_val);
+    str_free(&str_val);
     return err;
 error: ERR_CLEAN;
 }
@@ -330,9 +330,9 @@ ErrDeclStatic lex_static_get_hex(char **s, Str *esc, size_t num)
     TRY(str_app(esc, "%.*s", u8p.bytes, u8s), ERR_STR_APP);
     INFO("[%.*s]", u8p.bytes, u8s);
 clean:
-    str_free(str_val);
+    str_free(&str_val);
     return err;
-error: 
+error:
     if(s) {
         *s = endptr;
     }
@@ -482,7 +482,7 @@ int lex_process(Args *args, Str *stream, Lex *lex)
         platform_getchar();
     }
 clean:
-    str_free(lexitem.str);
+    str_free(&lexitem.str);
     return err;
 error: ERR_CLEAN;
 }
@@ -492,13 +492,13 @@ void lex_free(Lex *lex)
     if(!lex) return;
     for(size_t i = 0; i < lex->c; i++) {
         LexItem *item = &lex->items[i];
-        str_free(item->str);
+        str_free(&item->str);
         item->i = 0;
         item->l = 0;
         item->id = LEX_ID_NONE;
     }
     free(lex->items);
-    str_free(lex->fn);
+    str_free(&lex->fn);
     lex->items = 0;
     lex->c = 0;
     lex->l = 0;
@@ -547,7 +547,7 @@ void lex_hint(FILE *file, Lex *lex, size_t index)
     if(index > lex->l) THROW("index out of range");
     LexItem *item = 0;
     TRY(lex_get(lex, index, &item), ERR_LEX_GET);
-#if !DEBUG_DISABLE_ERR_MESSAGES 
+#if !DEBUG_DISABLE_ERR_MESSAGES
     lex_hint_item(file, item, lex->stream, &lex->fn);
 #endif
 error:

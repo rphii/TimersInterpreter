@@ -16,6 +16,8 @@
 #include "arg.h"
 #include "vec_lex.h"
 
+ErrDecl execute_file(Args *args, Str *filename);
+
 #define ERR_EXECUTE_FILE "failed single file execution"
 ErrDecl execute_file(Args *args, Str *filename)
 {
@@ -36,12 +38,12 @@ ErrDecl execute_file(Args *args, Str *filename)
         }
     }
 clean:
-    str_free(outbuf);
+    str_free(&outbuf);
     lex_free(&lex);
     ast_free(&ast, false, true);
     run_free(&run);
     return err;
-error: 
+error:
     ERR_CLEAN;
 }
 
@@ -74,7 +76,7 @@ ErrDecl execute_merge(Args *args)
         }
     }
 clean:
-    str_free(outbuf);
+    str_free(&outbuf);
     //lex_free(&lex);
     vec_lex_free(&vlex);
     ast_free(&ast, false, true);
