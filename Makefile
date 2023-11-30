@@ -1,7 +1,7 @@
 #### Start of system configuration section. ####
 
 GIT_VERSION := "$(shell git describe --abbrev=4 --dirty --always --tags)"
-CC      := gcc
+CC      := tcc
 CFLAGS  := -Wall -Wextra -Wimplicit \
 		   -Wno-unused-parameter \
 		   -Wconversion \
