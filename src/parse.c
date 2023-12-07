@@ -287,9 +287,9 @@ ErrDeclStatic parse_static_term(Lex *lex, size_t *index, Ast **node)
     TRY(ast_child_len(*node, &child_len), ERR_AST_CHILD_LEN);
     if(child_len) TRY(ast_child_get(*node, child_len - 1, &child), ERR_AST_CHILD_GET);
     if(!(child_len && child->ok)) {
-        if(((parent->id != AST_ID_OR && parent->id != AST_ID_XOR) || (*node)->ok) 
-                && (item->id == LEX_ID_IDENTIFIER 
-                    || (item->id == LEX_ID_OPERATOR 
+        if(((parent->id != AST_ID_OR && parent->id != AST_ID_XOR) || (*node)->ok)
+                && (item->id == LEX_ID_IDENTIFIER
+                    || (item->id == LEX_ID_OPERATOR
                         && item->str.l && (str_at(&item->str, 0) != LEX_CH_OR /*&& str_at(&item->str, 0) != LEX_CH_XOR*/ && !strchr(LEX_TERM, str_at(&item->str, 0)))))) {
             TRY(parse_static_increment_index(index), ERR_PARSE_INCREMENT_INDEX);
             TRY(ast_parent_get(*node, node), ERR_AST_PARENT_GET);
@@ -956,11 +956,12 @@ ErrDeclStatic parse_static_scope(Lex *lex, size_t *index, Ast **node)
         add_scope = true;
     } else if(child_len && item->id == LEX_ID_SEPARATOR && str_at(&item->str, 0) == LEX_CH_DEF_CLOSE) {
         /* check if child is not ok */
+        //printf("HELLO!\n");getchar();
         if(child_len) {
             TRY(ast_child_get(*node, child_len - 1, &child), ERR_AST_CHILD_GET);
             if(!child->ok) {
-                //ast_free(child, false);
-                ast_free(*node, true, false);
+                ast_free(child, false, false);
+                //ast_free(*node, true, false);
             }
         }
         /* finished, node is ok */
@@ -1225,7 +1226,7 @@ ErrDeclStatic parse_static_optimize_new_fnew(Ast *root, AstIDList id)
                     INFO("mark %p as %s", node, ast_id_str(replace_with));
                     //if(id == AST_ID_NEW) ast_inspect_mark(node, node);
                     node->id = replace_with;
-                    //goto done; 
+                    //goto done;
                 }
                 TRY(ast_next(&child, &layer), ERR_AST_NEXT);
             }
@@ -1446,7 +1447,7 @@ int parse_process(Args *args, Ast *ast, Lex *lex)
     TRY(parse_static_optimize_new_fnew(root, AST_ID_NEW), "failed to optimize NEW/FNEW");
     TRY(parse_static_optimize_new_fnew(root, AST_ID_FUNC_TIME), "failed to optimize NEW/FNEW");
     /* TODO merge those two function calls PLEASE and
-     * please, please: DON'T (!!!!!!!!) TRAVERSE THE TREE TWICE (2) 
+     * please, please: DON'T (!!!!!!!!) TRAVERSE THE TREE TWICE (2)
      * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
     /* finish */
     TRY(ast_adjust_il(root, 0), ERR_AST_ADJUST_IL);
@@ -1465,7 +1466,7 @@ int parse_process(Args *args, Ast *ast, Lex *lex)
 #endif
 #endif
 
-    if(args->inspect_ast == SPECIFY_CONFIRM 
+    if(args->inspect_ast == SPECIFY_CONFIRM
             || args->inspect_ast == SPECIFY_STEP) {
 #if !DEBUG
         platform_clear();
