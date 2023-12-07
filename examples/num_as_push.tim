@@ -2,6 +2,7 @@
    (0 1 2 3 4 5 6 7 8 9)
 -4 ('print keep -> ')
  5 ('print pop  -> ')
+ 5 ('print pop  -> ')
  . (~)
 
 ~~ functions
