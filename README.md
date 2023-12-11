@@ -254,6 +254,3 @@ seq:           #    +-*      |
 new:   ^$\:;.," `?&@   /=%><!
 ```
 
-### Broken Things
-- `nest.tim` should be interpretable and not raise an error (I THINK)
-
