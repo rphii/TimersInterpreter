@@ -1064,6 +1064,7 @@ ErrDeclStatic parse_static_scope_def(Lex *lex, size_t *index, Ast **node)
             return 0;
         } else {
             /* confirm pattern for definition */
+            TRY(ast_adjust_il(child, *index), ERR_AST_ADJUST_IL);
             LexItem *item = 0;
             TRY(lex_skip_whitespace(lex, index), ERR_LEX_SKIP_WS);
             TRY(lex_get(lex, *index, &item), ERR_LEX_GET);
