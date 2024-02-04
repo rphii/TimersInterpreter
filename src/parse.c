@@ -983,6 +983,7 @@ ErrDeclStatic parse_static_scope(Lex *lex, size_t *index, Ast **node)
                     err_def = true;
                     THROW("expected scope name");
                 } else {
+                    //ast_free(child, true, false);
                     child->id = AST_ID_FUNC_TIME;
                     *node = child;
                     break;
@@ -1064,7 +1065,7 @@ ErrDeclStatic parse_static_scope_def(Lex *lex, size_t *index, Ast **node)
             return 0;
         } else {
             /* confirm pattern for definition */
-            TRY(ast_adjust_il(child, *index), ERR_AST_ADJUST_IL);
+            //TRY(ast_adjust_il(child, *index), ERR_AST_ADJUST_IL);
             LexItem *item = 0;
             TRY(lex_skip_whitespace(lex, index), ERR_LEX_SKIP_WS);
             TRY(lex_get(lex, *index, &item), ERR_LEX_GET);
@@ -1075,8 +1076,8 @@ ErrDeclStatic parse_static_scope_def(Lex *lex, size_t *index, Ast **node)
             }
             if(item->id != LEX_ID_IDENTIFIER && item->str.l && str_at(&item->str, 0) != LEX_CH_DEF_OPEN) {
                 INFO("go up since pattern doesn't match");
-                ast_free(*node, true, false);
                 *index = child->i;
+                ast_free(*node, true, false);
                 TRY(ast_adjust_il(*node, *index), ERR_AST_ADJUST_IL);
                 TRY(ast_parent_get(*node, node), ERR_AST_PARENT_GET);
                 return 0;
@@ -1153,6 +1154,7 @@ ErrDeclStatic parse_static_program(Lex *lex, size_t *index, Ast **node)
                     err_def = true;
                     THROW("expected scope name");
                 } else {
+                    //ast_free(child, true, false);
                     child->id = AST_ID_FUNC_TIME;
                     *node = child;
                     break;
