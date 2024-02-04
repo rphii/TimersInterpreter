@@ -49,3 +49,9 @@ deadfish {
   loop{('>> ')} ~~ loop prompt
 }
 
+~~ notes:
+~~ if you'd enter 'default', 'checkneg' or 'check256' (with apostrophes)
+~~ you'd be able to call into said scopes, since ? will treat whatever
+~~ the user treats as strings, and therefore possibly not print the correct
+~~ amount of newlines
+
