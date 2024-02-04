@@ -1,14 +1,14 @@
 #### Start of system configuration section. ####
 
 GIT_VERSION := "$(shell git describe --abbrev=4 --dirty --always --tags)"
-CC      := tcc
+CC      := gcc
 CFLAGS  := -Wall -Wextra -Wimplicit \
 		   -Wno-unused-parameter \
 		   -Wconversion \
-		   -O3 -march=native \
+		   -Og -march=native \
+		   -fsanitize=address -rdynamic \
 		   ##############\
 		   -DCOLORPRINT_DISABLE \
-		   -fsanitize=address -rdynamic \
 		   -pg -rdynamic \
 		   -O2 \
 		   -O0 -g \
@@ -25,8 +25,8 @@ CFLAGS  := -Wall -Wextra -Wimplicit \
 
 LDFLAGS := \
 		   -lm \
-		   ##############\
 		   -fsanitize=address -rdynamic \
+		   ##############\
 		   -pg -rdynamic \
 		   -rdynamic -ggdb3 \
 		   -fsanitize=address \
