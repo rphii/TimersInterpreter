@@ -87,7 +87,7 @@ ErrDeclStatic next_static_callback_sequence(ExprBuf *buf, Val from, Val step)
         t_until = buf->until.val;
     } else if(buf->times.set) {
         if(!buf->times.val) return 0;
-        t_until = from + step * buf->times.val;
+        t_until = from + step * (buf->times.val - 1);
     } else {
         t_until = VAL_MAX;
     }
