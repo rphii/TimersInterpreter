@@ -531,22 +531,24 @@ error:
 void ast_free(Ast *ast, bool keep_current_id, bool final_clean)
 {
     if(!ast) THROW("expected pointer to an ast struct");
-#ifdef DEBUG_GETCHAR
+    INFO("free this: (keep_current_id %u)\n", keep_current_id);
+#ifdef DEBUG
     //if(ast) ast_inspect_mark(ast, ast);
 #endif
     ssize_t prev_layer = 0;
     ssize_t ast_layer = 0;
     Ast copy = {0};
     memcpy(&copy, ast, sizeof(copy));
-    INFO("free this:");
     Ast *stop = ast;
-    Ast *prev = ast;
     bool exit_pls = 0;
     TRY(ast_next(&ast, &ast_layer), "failed getting next");
+    Ast *prev = ast;
     while(ast_layer > 0) {
         TRY(ast_next(&ast, &ast_layer), "failed getting next");
+        INFO("ast_layer %zi, prev_layer %zi", ast_layer, prev_layer);
         if(ast_layer < prev_layer) {
             prev = prev->parent;
+            INFO("%p ? %p != %p : %p != %p", ast, ast ? ast->parent : 0, ast ? prev : 0, !ast ? stop->parent : 0, !ast ? prev : 0);
             while(ast ? ast->parent != prev : stop->parent != prev) {
                 Ast *clear = prev;
                 size_t child_cap = 0;
@@ -554,7 +556,7 @@ void ast_free(Ast *ast, bool keep_current_id, bool final_clean)
                 TRY(ast_child_cap(clear, &child_cap), "failed getting child length");
                 TRY(ast_parent_get(clear, &prev), "failed getting parent");
                 //INFO("FREE IN LOOP");
-                //printf("FREE CHILDREN OF %s %p (%zu)\n", ast_id_str(clear->id), clear, child_cap);
+                INFO("FREE CHILDREN OF %s %p (%zu)\n", ast_id_str(clear->id), clear, child_cap);
                 TRY(ast_static_free_range(clear, child_cap, final_clean), "failed freeing range");
                 clear->arrc = 0;
                 if(stop == clear) {
@@ -575,7 +577,7 @@ void ast_free(Ast *ast, bool keep_current_id, bool final_clean)
         stop->arri = copy.arri;
     } else {
         size_t child_cap = 0;
-        //INFO("FREE LAST %p", stop);
+        INFO("FREE LAST %p", stop);
         //TRY(ast_parent_get(stop, &stop), ERR_AST_PARENT_GET);
         TRY(ast_child_cap(stop, &child_cap), "failed getting child length");
         TRY(ast_static_free_range(stop, child_cap, final_clean), "failed freeing range");
