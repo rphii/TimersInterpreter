@@ -1,0 +1,51 @@
+~~ call deadfish
+,(deadfish~)
+
+~~ display prompt, get input and call process
+'>> '{([.:]~)-128(^,~).(@process~)}
+
+~~ process the input
+'process'{
+
+  1(;^<!| check256 checkneg default ?)
+  1(;^< |~) ~~ exit process
+
+  check256 {
+     (^:#)256(^=!:|`~)256($$~)
+  }
+
+  checkneg {
+     (^:#)2(^).(^\/<!:|`~).($$~)
+  }
+
+  default {
+      (:[?]~)'idos'($~)-($"~)
+  }
+  
+  i {
+     ~~(['INCREMENT']~)-(^,~)
+     (^:#)1(^+`~)
+    }
+  
+  d {
+     ~~(['DECREMENT']~)-(^,~)
+     (^:#)1(^-`~)
+    }
+  
+  o {
+     ~~(['OUTPUT']~)-(^,~)
+     (^#."~)
+    }
+
+  s {
+     ~~(['SQUARE']~)-(^,~)
+     (^:#)?(^*`~)
+    }
+}
+
+~~ setting up deadfish
+deadfish {
+  0(^loop) ~~ set initial value
+  loop{('>> ')} ~~ loop prompt
+}
+
