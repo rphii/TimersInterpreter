@@ -59,6 +59,7 @@ ErrDeclStatic next_static_callback_sequence(ExprBuf *buf, Val from, Val step)
 {
     if(!buf) THROW(ERR_EXPR_BUF_POINTER);
     INFO("from " FMT_VAL ", step " FMT_VAL "", from, step);
+    INFO("buf->cmp " FMT_VAL, buf->cmp);
 #if 1
     Val t_cmp = 0;
     if(buf->cmp < from) {
@@ -80,14 +81,17 @@ ErrDeclStatic next_static_callback_sequence(ExprBuf *buf, Val from, Val step)
     }
     Val t_from = from;
     Val t_until = 0;
+    INFO("buf->until set=%u ... val=" FMT_VAL "", buf->until.set, buf->until.val);
+    INFO("buf->times set=%u ... val=" FMT_VAL "", buf->times.set, buf->times.val);
     if(buf->until.set) {
         t_until = buf->until.val;
     } else if(buf->times.set) {
-        t_until = from + step * buf->until.val;
+        if(!buf->times.val) return 0;
+        t_until = from + step * buf->times.val;
     } else {
         t_until = VAL_MAX;
     }
-    INFO("sequence tcmp " FMT_VAL "", t_cmp);
+    INFO("sequence tcmp " FMT_VAL ", t_until " FMT_VAL "", t_cmp, t_until);
     Val t = 0;
     if(t_cmp >= t_from && t_cmp <= t_until) {
         t = t_cmp;
@@ -163,6 +167,7 @@ ErrDeclStatic next_static_callback_power(ExprBuf *buf, Val offset, Val exponent)
         INFO("increment iteration; t " FMT_VAL "", t);
     }
 #endif
+    if(buf->times.set && !buf->times.val) return 0;
     bool bounds = false;
     if(buf->times.set && !(iteration >= offset && iteration < buf->times.val + offset)) {
         bounds = true;

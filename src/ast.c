@@ -72,11 +72,6 @@ ErrDeclStatic ast_static_free_range(Ast *clear, size_t iE, bool final_clean)
                     free(unassign->branch.lut);
                 }
             }
-            //if(unassign->id == AST_ID_SCOPE_NAME) {
-            //    //str_free_single(unassign->branch.str);
-            //    free(unassign->branch.str);
-            //}
-            //memset(unassign, 0, sizeof(*unassign));
             free(unassign);
             unassign_base[i] = 0;
         }
