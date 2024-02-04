@@ -102,7 +102,7 @@ The following operations can be put inside any [time function](#Time-Functions).
 |`,`        |Pop top of stack and output as character|
 |`"`        |Print a newline|
 |`#`        |Pop top value, n, and push n-th stack value (bottom = 0). If the stack is smaller than the given index, skip|
-|`` ` ``    |Pop two values, n (top), b, overwrite n-th stack value (bottom = 0) with b. If the stack is smaller than the given index, skip|
+|`` ` ``    |Pop two values, a (top), n, overwrite n-th stack value (bottom = 0) with a. If the stack is smaller than the given index, skip|
 |`?`        |Pop top of stack and insert character into code, if it's a valid unicode character. If the stack is empty, insert an `_` instead. Using multiple `?` will automatically concenate them with whatever is before/after them. The resulting instruction is either one of the command list or a function call. And finally, if it results in an invalid instruction, skip|
 |`&`        |Get an integer from the user and push it. If a string is entered it will still try to convert numbers but it will also convert each character to its unicode codepoint and push that instead|
 |`@`        |Get a string from the user and push it (latter characters in the string are pushed first, so that the beginning lies on the top)|
