@@ -198,17 +198,18 @@ ErrDeclStatic execute_static_cmd(Run *run, Scope *scope, char cmd, bool ignore_w
             }
         } break;
         case LEX_CH_SET_N: {
+            Val a = 0;
             Val n = 0;
-            Val b = 0;
-            if(len >= 1) vec_val_pop_back(stack, &n);
-            if(len >= 2) vec_val_pop_back(stack, &b);
+            if(len >= 1) vec_val_pop_back(stack, &a);
+            if(len >= 2) vec_val_pop_back(stack, &n);
+            //printf(F("{ [" FMT_VAL "] = " FMT_VAL "}", FG_BK_B), n, b);
             if(len) {
                 if(n < (Val)vec_val_length(stack) && (Val)((size_t)n) == n) {
-                    vec_val_set_at(stack, (size_t)n, b);
+                    vec_val_set_at(stack, (size_t)n, a);
                 } else {
                     /* revert pop, TODO figure out if that is what I really want to do... */
-                    if(len <= 2) TRY(vec_val_push_back(stack, b), ERR_VEC_PUSH_BACK);
-                    if(len <= 1) TRY(vec_val_push_back(stack, n), ERR_VEC_PUSH_BACK);
+                    if(len <= 2) TRY(vec_val_push_back(stack, n), ERR_VEC_PUSH_BACK);
+                    if(len <= 1) TRY(vec_val_push_back(stack, a), ERR_VEC_PUSH_BACK);
                 }
             }
         } break;
