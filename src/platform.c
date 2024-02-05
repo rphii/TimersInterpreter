@@ -104,6 +104,34 @@ void platform_clear(void)
 
 
 /******************************************************************************/
+/* platform_read_pipe - read from stdin pipe **********************************/
+/******************************************************************************/
+
+int platform_read_pipe(Str *content) //{{{
+{
+#if defined(PLATFORM_LINUX)
+    if(!isatty(fileno(stdin))) {
+        int c = 0;
+        while((c = getchar()) && c != EOF) {
+            TRY(str_app(content, "%c", (unsigned char)c), ERR_STR_APP);
+        }
+    }
+#elif defined(PLATFORM_WINDOWS)
+    int c = 0;
+    while((c = getchar()) && c != EOF) {
+        TRY(str_app(content, "%c", (unsigned char)c), ERR_STR_APP);
+    }
+#else
+    INFO("reading pipe is not implemented on " PLATFORM_STRING "!");
+#endif
+    return 0;
+error:
+    return -1;
+    goto error; /* maybe remove warning on non-implemented platforms */
+} //}}}
+
+
+/******************************************************************************/
 /* utf8_enable - mainly windows ***********************************************/
 /******************************************************************************/
 

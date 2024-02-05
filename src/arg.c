@@ -116,6 +116,7 @@ void print_help(Args *args)
     printf("\n\n");
     print_line(args->tabs.max, 0, 0, &STR("Usage:\n"));
     print_line(args->tabs.max, args->tabs.main, args->tabs.main, &STR("timers [options] [file]\n"));
+    print_line(args->tabs.max, args->tabs.main, args->tabs.main, &STR("cat ... | timers [options] [file]\n"));
     //PRINTF_TABBED(args->tabs.main, "timers [options]\n");
     //PRINTF_TABBED(args->tabs.main, "[string] | timers\n");
     printf("\n");
@@ -365,12 +366,13 @@ ErrDecl arg_parse(Args *args, int argc, const char **argv)
 {
     Str temp = {0};
     if(!args) THROW(ERR_ARGS_POINTER);
+    TRY(platform_read_pipe(&args->pipe), ERR_PLATFORM_READ_PIPE);
     args->tabs.tiny = 2;
     args->tabs.main = 7;
     args->tabs.ext = 32;
     args->tabs.spec = args->tabs.ext + 2;
     args->tabs.max = 80;
-    if(argc == 1) {
+    if(argc == 1 && !str_length(&args->pipe)) {
         print_help(args);
     } else for(int i = 1; i < argc; i++) {
         /* verify command line arguments */
@@ -455,6 +457,7 @@ void arg_free(Args *args)
 {
     if(!args) return;
     str_free_single(&args->unknown);
+    str_free_single(&args->pipe);
     vec_str_free(&args->files);
 }
 

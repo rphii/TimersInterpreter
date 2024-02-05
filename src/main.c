@@ -16,10 +16,10 @@
 #include "arg.h"
 #include "vec_lex.h"
 
-ErrDecl execute_file(Args *args, Str *filename);
+ErrDecl execute_file(Args *args, Str *filename, bool is_stream);
 
 #define ERR_EXECUTE_FILE "failed single file execution"
-ErrDecl execute_file(Args *args, Str *filename)
+ErrDecl execute_file(Args *args, Str *filename, bool is_stream)
 {
     int err = 0;
     if(!args) THROW(ERR_ARGS_POINTER);
@@ -28,8 +28,13 @@ ErrDecl execute_file(Args *args, Str *filename)
     Ast ast = {0};
     Run run = {0};
     Str outbuf = {0};
-    TRY(file_str_read(filename, &outbuf), ERR_FILE_STR_READ);
-    TRY(str_app(&lex.fn, STR_F, STR_UNP(*filename)), ERR_STR_APP);
+    if(!is_stream) {
+        TRY(file_str_read(filename, &outbuf), ERR_FILE_STR_READ);
+        TRY(str_app(&lex.fn, STR_F, STR_UNP(*filename)), ERR_STR_APP);
+    } else {
+        memcpy(&outbuf, filename, sizeof(outbuf));
+        TRY(str_app(&lex.fn, PLATFORM_PIPE_STRING), ERR_STR_APP);
+    }
     TRY(lex_process(args, &outbuf, &lex), ERR_LEX_PROCESS);
     if(!args->skip_parse) {
         TRY(parse_process(args, &ast, &lex), ERR_PARSE_PROCESS);
@@ -38,7 +43,7 @@ ErrDecl execute_file(Args *args, Str *filename)
         }
     }
 clean:
-    str_free(&outbuf);
+    if(!is_stream) str_free(&outbuf);
     lex_free(&lex);
     ast_free(&ast, false, true);
     run_free(&run);
@@ -56,13 +61,18 @@ ErrDecl execute_merge(Args *args)
     Ast ast = {0};
     Run run = {0};
     Str outbuf = {0};
-    for(size_t i = 0; i < vec_str_length(&args->files); i++) {
+    for(size_t i = 0; i < vec_str_length(&args->files)+1; i++) {
         Lex lex = {0};
         str_recycle(&outbuf);
-        Str *file = vec_str_get_at(&args->files, i);
         /* lex */
-        TRY(file_str_read(file, &outbuf), ERR_FILE_STR_READ);
-        TRY(str_app(&lex.fn, STR_F, STR_UNP(*file)), ERR_STR_APP);
+        if(i != 0) {
+            Str *file = vec_str_get_at(&args->files, i-1);
+            TRY(file_str_read(file, &outbuf), ERR_FILE_STR_READ);
+            TRY(str_app(&lex.fn, STR_F, STR_UNP(*file)), ERR_STR_APP);
+        } else {
+            TRY(str_copy(&outbuf, &args->pipe), ERR_STR_COPY);
+            TRY(str_app(&lex.fn, PLATFORM_PIPE_STRING), ERR_STR_APP);
+        }
         TRY(lex_process(args, &outbuf, &lex), ERR_LEX_PROCESS);
         /* parse */
         if(!args->skip_parse) {
@@ -99,11 +109,12 @@ int main(int argc, const char **argv)
         goto clean;
     }
 
-    if(argc > 1 && !vec_str_length(&args.files)) THROW("no input files");
+    if(argc > 1 && !vec_str_length(&args.files) && !str_length(&args.pipe)) THROW("no input files");
     if(!args.merge) {
+        TRY(execute_file(&args, &args.pipe, true), ERR_EXECUTE_FILE);
         for(size_t i = 0; i < vec_str_length(&args.files); i++) {
             Str *file = vec_str_get_at(&args.files, i);
-            TRY(execute_file(&args, file), ERR_EXECUTE_FILE);
+            TRY(execute_file(&args, file, false), ERR_EXECUTE_FILE);
         }
     } else {
         TRY(execute_merge(&args), ERR_EXECUTE_MERGE);

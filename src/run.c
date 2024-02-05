@@ -39,6 +39,7 @@ int run_process(Run *run, Ast *ast)
     int err = 0;
     if(!run) THROW("expected pointer to run struct");
     if(!ast) THROW("expected pointer to ast struct");
+    if(!ast->l) goto clean;
 
     /* set up run */
     TRY(parse_build_func_name_lut(ast), ERR_PARSE_BUILD_FUNC_NAME_LUT);
