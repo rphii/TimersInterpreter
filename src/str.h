@@ -71,6 +71,7 @@ VEC_INCLUDE(Str, str, char, BY_VAL);
 #define ERR_STR_APP         "failed appending string"
 #define ERR_STR_TO_U8_POINT "failed conversion of string to u8 point"
 #define ERR_STR_FROM_U8_POINT "failed conversion of string from u8 point"
+#define ERR_STR_COPY        "failed copying string"
 
 
 Str *str_new_p(void);

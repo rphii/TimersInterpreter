@@ -65,6 +65,10 @@ int platform_getch(void);
 int platform_getchar(void);
 void platform_clear(void);
 
+#define PLATFORM_PIPE_STRING "(pipe)"
+#define ERR_PLATFORM_READ_PIPE "failed reading from pipe"
+int platform_read_pipe(Str *content);
+
 #define ERR_PLATFORM_UTF8_ENABLE "failed enabling utf-8"
 int platform_utf8_enable(void);
 

@@ -1305,6 +1305,7 @@ int parse_process(Args *args, Ast *ast, Lex *lex)
     if(!args) THROW(ERR_ARGS_POINTER);
     if(!ast) THROW(ERR_AST_POINTER);
     if(!lex) THROW(ERR_LEX_POINTER);
+    if(!lex->l) goto clean;
 
     Ast *root = ast;
     Ast *node = ast;
@@ -1480,6 +1481,7 @@ int parse_process(Args *args, Ast *ast, Lex *lex)
     }
 
     INFO("reached end (node was NONE)");
+clean:
     return 0;
 error:
     return -1;

@@ -463,6 +463,7 @@ int lex_process(Args *args, Str *stream, Lex *lex)
     if(!lex) THROW(ERR_LEX_POINTER);
     if(!args) THROW(ERR_ARGS_POINTER);
     lex->stream = stream;
+    if(!str_length(lex->stream)) goto clean;
 
     /*  */
     for(;;) {
