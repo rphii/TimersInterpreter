@@ -116,13 +116,14 @@ int platform_read_pipe(Str *content) //{{{
             TRY(str_app(content, "%c", (unsigned char)c), ERR_STR_APP);
         }
     }
+    //fseek(stdin,0,SEEK_END);
 #elif defined(PLATFORM_WINDOWS)
     int c = 0;
     while((c = getchar()) && c != EOF) {
         TRY(str_app(content, "%c", (unsigned char)c), ERR_STR_APP);
     }
 #else
-    INFO("reading pipe is not implemented on " PLATFORM_STRING "!");
+    INFO("reading pipe is not implemented on %s!", PLATFORM_NAME);
 #endif
     return 0;
 error:
