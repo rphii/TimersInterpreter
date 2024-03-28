@@ -61,10 +61,10 @@ all: $(TARGET)
 
 install: $(TARGET)
 	@mkdir -p $(DESTDIR)$(PREFIX)/bin
-	@cp -p $(TARGET) $(DESTDIR)$(PREFIX)/bin/timers
+	@cp -p $(TARGET) $(DESTDIR)$(PREFIX)/bin/${APPNAME}
 
 uninstall:
-	@rm -rf $(DESTDIR)$(PREFIX)/bin/timers
+	@rm -rf $(DESTDIR)$(PREFIX)/bin/${APPNAME}
 
 # link all .o files
 $(TARGET): $(O_FILES) | $(TRG_DIR)
