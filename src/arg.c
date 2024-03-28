@@ -115,8 +115,12 @@ void print_help(Args *args)
     print_line(args->tabs.max, 0, 0, &STR(F("timers:", BOLD)" command-line interpreter for the Timers language."));
     printf("\n\n");
     print_line(args->tabs.max, 0, 0, &STR("Usage:\n"));
-    print_line(args->tabs.max, args->tabs.main, args->tabs.main, &STR("timers [options] [file]\n"));
-    print_line(args->tabs.max, args->tabs.main, args->tabs.main, &STR("cat ... | timers [options] [file]\n"));
+    TRY(str_app(&ts, "%s [options] [file]\n", args->name), ERR_STR_APP);
+    print_line(args->tabs.max, args->tabs.main, args->tabs.main, &ts);
+    str_recycle(&ts);
+    TRY(str_app(&ts, "cat ... | %s [options] [file]\n", args->name), ERR_STR_APP);
+    print_line(args->tabs.max, args->tabs.main, args->tabs.main, &ts);
+    str_recycle(&ts);
     //PRINTF_TABBED(args->tabs.main, "timers [options]\n");
     //PRINTF_TABBED(args->tabs.main, "[string] | timers\n");
     printf("\n");
@@ -367,6 +371,7 @@ ErrDecl arg_parse(Args *args, int argc, const char **argv)
     Str temp = {0};
     if(!args) THROW(ERR_ARGS_POINTER);
     TRY(platform_read_pipe(&args->pipe), ERR_PLATFORM_READ_PIPE);
+    args->name = argv[0];
     args->tabs.tiny = 2;
     args->tabs.main = 7;
     args->tabs.ext = 32;

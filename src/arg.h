@@ -32,6 +32,7 @@ typedef enum {
 
 #define ERR_ARGS_POINTER "expected pointer to Args struct"
 typedef struct Args {
+    const char *name;
     Str unknown;
     Str pipe;
     VecStr files;
