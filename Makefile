@@ -34,6 +34,7 @@ LDFLAGS := \
 		   -rdynamic -Og -ggdb3
 CSUFFIX	:= .c
 HSUFFIX	:= .h
+PREFIX ?= /usr
 
 #### End of system configuration section. ####
 
@@ -57,6 +58,13 @@ O_FILES := $(addprefix $(OBJ_DIR)/,$(notdir $(C_FILES:$(CSUFFIX)=.o)))
 D_FILES := $(addprefix $(OBJ_DIR)/,$(notdir $(C_FILES:$(CSUFFIX)=.d)))
 
 all: $(TARGET)
+
+install: $(TARGET)
+	@mkdir -p $(DESTDIR)$(PREFIX)/bin
+	@cp -p $(TARGET) $(DESTDIR)$(PREFIX)/bin/timers
+
+uninstall:
+	@rm -rf $(DESTDIR)$(PREFIX)/bin/timers
 
 # link all .o files
 $(TARGET): $(O_FILES) | $(TRG_DIR)
