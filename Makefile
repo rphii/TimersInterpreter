@@ -5,14 +5,14 @@ CC      := gcc
 CFLAGS  := -Wall -Wextra -Wimplicit \
 		   -Wno-unused-parameter \
 		   -Wconversion \
-		   -Og -march=native \
-		   -fsanitize=address -rdynamic \
+		   -O3 -march=native \
 		   ##############\
+		   -rdynamic -Og -ggdb3 \
+		   -fsanitize=address -rdynamic \
 		   -DCOLORPRINT_DISABLE \
 		   -pg -rdynamic \
 		   -O2 \
 		   -O0 -g \
-		   -rdynamic -Og -ggdb3 \
 		   -DCOLORPRINT_DISABLE \
 		   -Werror \
 		   -Warith-conversion \
@@ -25,10 +25,10 @@ CFLAGS  := -Wall -Wextra -Wimplicit \
 
 LDFLAGS := \
 		   -lm \
-		   -fsanitize=address -rdynamic \
 		   ##############\
-		   -pg -rdynamic \
+		   -fsanitize=address -rdynamic \
 		   -rdynamic -ggdb3 \
+		   -pg -rdynamic \
 		   -fsanitize=address \
 		   -pg \
 		   -rdynamic -Og -ggdb3
