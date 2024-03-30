@@ -142,7 +142,7 @@ int platform_utf8_enable(void)
 #if defined(PLATFORM_WINDOWS) && !defined(COLORPRINT_DISABLE)
     err = system("chcp 65001 >nul");
     if(err) {
-        THROW("failed enabling utf-8 codepage. Try compiling with -D"S(PLATFORM_DISABLE)"");
+        THROW("failed enabling utf-8 codepage. Try compiling with -D" S(PLATFORM_DISABLE)"");
     }
 clean:
     return err;

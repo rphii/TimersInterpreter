@@ -258,7 +258,7 @@ ErrDecl str_get_str(Str *str)
     if(!str) THROW(ERR_STR_POINTER);
     int c = 0;
     str_recycle(str);
-    fflush(stdin);
+    //printf("[get string.. %i]\n", getchar());
     while((c = getchar()) != '\n' && c != EOF) {
         TRY(str_app(str, "%c", (char)c), ERR_STR_APP);  /* append string */
     }

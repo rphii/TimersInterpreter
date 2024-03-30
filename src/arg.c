@@ -12,7 +12,6 @@ VEC_IMPLEMENT(VecStr, vec_str, Str, BY_REF, str_free_single);
 
 typedef struct SpecifyGroup {
     size_t l;
-    //char **s;
     SpecifyList *s;
 } SpecifyGroup;
 //#define STR_GROUP(...)  (StrGroup){.s = (char *[]){__VA_ARGS__}, .l = sizeof((char *[]){__VA_ARGS__})/sizeof(*(char *[]){__VA_ARGS__})}

@@ -61,8 +61,9 @@ ErrDecl execute_merge(Args *args)
     Ast ast = {0};
     Run run = {0};
     Str outbuf = {0};
+    Lex lex = {0};
     for(size_t i = 0; i < vec_str_length(&args->files)+1; i++) {
-        Lex lex = {0};
+        memset(&lex, 0, sizeof(lex));
         str_recycle(&outbuf);
         /* lex */
         if(i != 0) {
@@ -87,7 +88,7 @@ ErrDecl execute_merge(Args *args)
     }
 clean:
     str_free(&outbuf);
-    //lex_free(&lex);
+    lex_free(&lex);
     vec_lex_free(&vlex);
     ast_free(&ast, false, true);
     run_free(&run);
